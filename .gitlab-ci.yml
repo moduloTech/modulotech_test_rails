@@ -1,0 +1,60 @@
+include:
+  - project: 'modulosource/modulotech/devops/gitlab-ci-templates'
+    file:
+      - '/templates/helm.gitlab-ci.yml'
+      - '/templates/integration.gitlab-ci.yml'
+      - '/templates/docker-buildx.gitlab-ci.yml'
+
+services:
+  - postgres:13.5
+  - redis:6.2
+
+variables:
+  IMAGE_NAME: modulotech-test-rails
+  POSTGRES_DB: modulotech-test-rails_test
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  MODULOTECH-TEST-RAILS_DATABASE_HOST: postgres
+
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  extends: .test
+  script:
+    - "bundle exec rake db:create RAILS_ENV=test"
+    - "RAILS_ENV=test bundle exec rake db:migrate:reset"
+    - RAILS_ENV=test bundle exec rspec --format progress --format RspecJunitFormatter --out rspec.xml
+
+build_integration_image:
+  extends: .build_integration_image
+
+docker_build:
+  extends: .docker_buildx_push
+  only:
+    - merge_requests
+    - staging
+
+
+deploy_staging:
+  extends: .deploy_capistrano
+  variables:
+    STAGE: staging
+  only:
+    - staging
+
+deploy_production:
+  extends: .deploy_capistrano
+  variables:
+    STAGE: production
+  only:
+    - master
+rubocop:
+  extends: .lint
+# Scan Gemfile.lock for Common Vulnerabilities and Exposures
+# https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures
+# https://www.cve.org/
+bundleraudit:
+  extends: .bundleraudit
