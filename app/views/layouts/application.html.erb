@@ -12,6 +12,21 @@
 
   <body>
     <%= render partial: 'shared/navigation' %>
+
+    <% if notice.present? %>
+      <div role="alert" class="alert alert-info alert-dismissible fade show">
+        <%= notice %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+
+    <% if alert.present? %>
+      <div role="alert" class="alert alert-warning alert-dismissible fade show">
+        <%= alert %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
