@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-health_check_routes
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  health_check_routes
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root "rooms#index"
+
+  resources :rooms, only: %i[index show]
 end
