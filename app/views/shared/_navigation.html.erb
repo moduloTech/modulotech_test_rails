@@ -31,6 +31,16 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
+                <!-- TODO: Implement route '/my/rooms' to display the rooms owned by the user -->
+                <!-- TODO: '/my/rooms' must allow the user to fully manage its rooms -->
+                <%= link_to 'My rooms', '/my/rooms', class: 'dropdown-item' %>
+              </li>
+              <li>
+                <!-- TODO: Implement route '/my/reservations' to display the reservations made by the user -->
+                <!-- TODO: '/my/rooms' must allow the user to fully manage its reservations -->
+                <%= link_to 'My reservations', '/my/reservations', class: 'dropdown-item' %>
+              </li>
+              <li class="border-top">
                 <%= button_to destroy_user_session_path, class: 'dropdown-item', method: :delete do %>
                   Sign out
                 <% end %>
@@ -41,7 +51,7 @@
           <li class="nav-item">
             <%= link_to 'Sign in', new_user_session_path %>
           </li>
-      <% end %>
+        <% end %>
       </ul>
     </div>
   </div>
