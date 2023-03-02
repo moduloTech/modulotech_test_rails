@@ -18,8 +18,24 @@ It was generated using Modulotech's template: this includes Dockerfile, docker-c
 2. Implement all `TODO` present in the code.
 3. Ensure your application is fully functional.
 4. Ensure the Rubocop is green.
+5. Create a merge request from your project to the original one.
+
+Your project must run under Docker, you must use PostgreSQL.
+
+You are free to add as many controllers, actions, models, views and routes as you want but you can not remove 
+what is originally present in this template. 
+
+You are free to add, remove and replace **any** gem **except Modulorails, Devise, Pg and Rails (obviously)**.
 
 ## Evaluation
+
+Your merge request will be evaluated directly on Github.
+
+If your merge request is approved, you win an interview. If it is declined, this is the end of the process for you.
+
+*Your merge request will never be merged for obvious reasons. ;)*
+
+### Caveat
 
 Modulotech works with Docker for development environment and deploys using Kubernetes.
 
@@ -37,4 +53,3 @@ to [get started](https://docs.docker.com/get-started/).*
 
 Your goal is to win the maximum of points and to impress me!
 
-You are free to add, remove and replace **any** gem **except Modulorails, Pg and Rails (obviously)**.
