@@ -1,0 +1,26 @@
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <% @rooms.each do |room| %>
+        <div class="col">
+          <%= link_to(user_rooms ? my_room_path(room) : room_path(room), class: 'text-decoration-none link-dark') do %>
+            <div class="card shadow-sm">
+              <div class="p-3">
+                <% if room.images.exists? %>
+                  <%= image_tag(room.images.first, width: '100%', height: 200) %>
+                <% else %>
+                  <%= image_tag('no_image', width: '100%', height: 200) %>
+                <% end %>
+              </div>
+              <div class="card-body">
+                <p class="card-text"><%= room.name %></p>
+                <span><%= room.location %></span>
+                <p class="card-text">Price per night: <%= room.price_per_night %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

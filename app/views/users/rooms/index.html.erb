@@ -1,0 +1,4 @@
+<h1>My rooms</h1>
+<%= link_to('Create new room', new_my_room_path, class: 'btn btn-success') %>
+
+<%= render('shared/rooms', user_rooms: true) %>

@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <h1>My reservations</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Room name</th><th>Check in</th><th>Check out</th><th></th><th></th>
+    </tr>
+    </thead>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= link_to(reservation.room.name, room_path(reservation.room.id)) %></td>
+        <td><%= reservation.check_in %></td>
+        <td><%= reservation.check_out %></td>
+        <td><%= link_to('Edit', edit_my_reservation_path(reservation.id), class: 'btn btn-primary') %></td>
+        <td><%= button_to('Cancel', my_reservation_path(reservation.id), method: :delete, class: 'btn btn-danger') %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

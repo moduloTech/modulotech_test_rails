@@ -1,33 +1,29 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  users:
+    rooms:
+      create:
+        success: "Room was successfully created."
+      update:
+        success: "Room was successfully updated."
+      destroy:
+        success: "Room was successfully destroyed."
+        failed: "Cannot remove this room."
+    images:
+      destroy:
+        success: "Image was successfully deleted."
+    reservations:
+      create:
+        success: "Reservation was successfully created."
+        failed: "Cannot reserve this room for these dates."
+      update:
+        success: "Reservation was successfully updated."
+      destroy:
+        success: "Reservation was successfully canceled."
+        failed: "Cannot cancel reservation."
+  models:
+    room:
+      check_dates: "Start date must be earlier than end date"
+    reservation:
+      check_dates: "Check in date must be earlier that check out date"
+      incorrect_check_in: "Incorrect check in date"
+      incorrect_check_out: "Incorrect check out date"
