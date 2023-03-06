@@ -1,0 +1,25 @@
+<div class="col-lg-8 mx-auto p-4 py-md-5">
+  <div class="align-items-center pb-3 mb-3 border-bottom">
+    <%= link_to('Edit room', edit_my_room_path(@room), class: 'btn btn-primary d-inline') %>
+    <%= button_to('Delete room', my_room_path(@room), method: :delete, class: 'btn btn-danger', form: { class: 'd-inline '}) %>
+    <div>
+      <p class="fs-4"><%= @room.name %></p>
+    </div>
+    <div><span>Location: <%= @room.location %></span></div>
+  </div>
+  <div>
+    <div class="row">
+      <% @room.images.each do |image| %>
+        <div class="col-md-4">
+          <%= image_tag(image, class: 'card-image-top', width: '100%') %>
+          <div class="card-body">
+            <%= button_to('Delete image', my_room_image_path(@room, image), method: :delete, class: 'btn btn-danger') %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <hr class="col-3 col-md-2 mb-5">
+    <p>Price per night: <%= @room.price_per_night %></p>
+  </div>
+</div>
+
