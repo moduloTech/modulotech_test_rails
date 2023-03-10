@@ -1,4 +1,18 @@
-<h1>Rooms#show</h1>
-<p>Find me in app/views/rooms/show.html.erb</p>
-<!-- TODO: Display rooms data: Name, Location, Picture(s), Price per night -->
-<!-- TODO: Allow to reserve the room for various periods of time -->
+<div class="container">
+  <div class="form-wrapper">
+    <h2>Book a flat</h2>
+    <%= simple_form_for [@room, @booking] do |f| %>
+      <%= f.input :checkin, as: :string,
+                               required: false,
+                               input_html: { id: "range_start" } %>
+      <%= f.input :checkout, as: :string,
+                             required: false,
+                             input_html: { id: "range_end" } %>
+      <%= f.button :submit, "Book", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <div id="booking-form-div"
+     data-bookings="<%= @bookings_dates.to_json %>">
+  </div>
+</div>
