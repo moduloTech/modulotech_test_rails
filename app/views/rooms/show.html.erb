@@ -1,18 +1,55 @@
 <div class="container">
-  <div class="form-wrapper">
-    <h2>Book a flat</h2>
-    <%= simple_form_for [@room, @booking] do |f| %>
-      <%= f.input :checkin, as: :string,
-                               required: false,
-                               input_html: { id: "range_start" } %>
-      <%= f.input :checkout, as: :string,
-                             required: false,
-                             input_html: { id: "range_end" } %>
-      <%= f.button :submit, "Book", class: "btn btn-primary" %>
-    <% end %>
+  <!-- IMAGES -->
+  <div class="title-results">
+    <h1>"<%= "#{@room.title.upcase}"%>"</h1> <br>
   </div>
 
-  <div id="booking-form-div"
-     data-bookings="<%= @bookings_dates.to_json %>">
+  <!-- DETAILS -->
+  <div class="info-form">
+    <div class="info-show">
+      <div class="details-show">
+        <ul style="list-style-type:none; ">
+          <li><i class="fas fa-paw"></i> Description: <%= @room.description %></li> <br>
+          <li><i class="far fa-address-card"></i> Contact: <%= @room.user.email %></li><br>
+          <li><i class="fas fa-globe-asia"></i> Location: <%= @room.address %></li><br>
+          <li></li>
+        </ul>
+      </div>
+      <div class="reviews">
+        <h3><strong>Reviews :</strong></h3>
+          <p>Price : <span id="price"> <%= @room.price %> </span> €/day</p>
+      </div>
+    </div>
+    <div class="form-show">
+      <h1> BOOK ME !</h1>
+      <%= simple_form_for [@room, @booking ] do |f| %>
+        <%= f.input :checkin, label:"Selectionnez vos dates", as: :string, required: false, input_html: {id: "start_date", class: "d-none"}%>
+        <%= f.input :checkout, label:false, as: :string, required: false, input_html: {id: "range_end", class: "d-none"}%>
+        <br>
+        <h1><small>TOTAL:</small>
+        <span id='totalprice'>0</span>€
+        </h1>
+        <br>
+        <%= f.submit class: "btn btn-primary homebtn2" %>
+      <% end %>
+    </div>
   </div>
 </div>
+
+<div style="border: 1px solid rgb(221, 221, 221); border-radius: 12px; padding: 24px; box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;">
+  <% if @current_booking != nil %>
+    <%= simple_form_for @current_booking do |f| %>
+      <%= f.input :review %>
+      <%= f.input :rating, collection: 1..5 %>
+      <%= hidden_field_tag 'room', @room.id %>
+      <%= f.submit %>
+    <% end %>
+  <% end %>
+
+<div id="booking-form-div"
+    data-bookings="<%= @bookings_dates.to_json %>">
+</div>
+
+<script type="text/javascript">
+ 
+</script>

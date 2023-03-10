@@ -13,8 +13,8 @@ class RoomsController < ApplicationController
         from: booking.checkin,
         to:   booking.checkout
       }
-    @current_booking = Booking.find_by(user: current_user, room_id: @room)
     end
+    @current_booking = Booking.find_by(user: current_user, room_id: @room)
   end
 
 end
