@@ -48,6 +48,17 @@ gem "sassc-rails"
 # Use Bootstrap for style
 gem "bootstrap"
 
+# User faker for seeds
+gem 'faker'
+
+# User Geocoder for location
+gem 'geocoder'
+
+gem 'byebug'
+
+#Use slim instead of erb 
+gem 'slim-rails', '~> 3.1', '>= 3.1.1'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -73,7 +84,8 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+gem 'modulorails', '= 1.3.0'
+gem 'simple_form'
 
-gem "modulorails"
 
 gem "devise"
