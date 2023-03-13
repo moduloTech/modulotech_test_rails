@@ -48,16 +48,11 @@ gem "sassc-rails"
 # Use Bootstrap for style
 gem "bootstrap"
 
-# User faker for seeds
-gem 'faker'
+# Use pundit for authorization
+gem "pundit"
 
-# User Geocoder for location
-gem 'geocoder'
-
+# Use byebug for debug
 gem 'byebug'
-
-#Use slim instead of erb 
-gem 'slim-rails', '~> 3.1', '>= 3.1.1'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
