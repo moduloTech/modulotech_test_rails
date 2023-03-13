@@ -1,23 +1,21 @@
 class RoomsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
 
   def index
+    @rooms = policy_scope(Room)
     @availables_rooms = get_available_rooms(params[:checkin], params[:checkout], params[:query])
   end
 
   def show
     @room = Room.find(params[:id])
+    authorize @room
     @booking = Booking.new
-    @bookings = @room.bookings
-    @bookings_dates = @bookings.map do |booking|
-      {
-        from: booking.checkin,
-        to:   booking.checkout
-      }
-    end
+    @bookings_dates = @bookings.map { |booking| { from:booking.checkin, to: booking.checkout } }
     @current_booking = Booking.find_by(user: current_user, room_id: @room)
   end
 
   def user_rooms
+    authorize Room
     @rooms_as_host = current_user.rooms
     @room = Room.new
   end
@@ -25,6 +23,7 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     @room.user_id = current_user.id
+    authorize @room
     if @room.save
       redirect_to room_path(@room)
     else

@@ -2,20 +2,23 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking = Booking.find(params[:id])
+    authorize @booking
     redirect_to :action => 'user_bookings' if @booking.delete
   end 
 
   def create
-    @booking = Booking.new(booking_params)
     @room = Room.find(params[:room_id])
+    @booking = Booking.new(booking_params)
     @booking.room_id = @room.id
     @booking.user = current_user
+    authorize @booking
     redirect_to :action => 'user_bookings' if @booking.save
   end
 
   def user_bookings
-    @user_bookings = current_user.bookings.where("checkout >= :date_today", date_today: Date.today)
-    @archived_bookings = current_user.bookings.where("checkout < :date_today", date_today: Date.today)
+    authorize Booking
+    @user_bookings = current_user.bookings.current
+    @archived_bookings = current_user.bookings.past
   end
 
   private
