@@ -1,0 +1,46 @@
+<div class="container">
+  <h1>Mes réservations</h1>
+  <!-- TODO: Display rooms available for booking -->
+  <div class="container justify-content-around">
+    <% @user_bookings.each do |booking| %>
+      <ul>
+        <li>
+          <div class="container">
+            <h1><%= booking.room.city %> - <%= booking.room.country %></h1>
+            <div class="card" style="width: 20rem;">
+                <div class="card-header"><%= booking.room.title %></div>
+                <div class="card-body">
+                  <ul>
+                    <li>Arrivée: <%= booking.checkin%> </li>
+                    <li> Départ: <%= booking.checkout %></li>
+                  </ul>
+                </div>
+                <div class="card-footer"><%= link_to "Voir la chambre", room_path(booking.room) %></div>
+                <div class="card-footer"><%= link_to "delete", booking, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    <%end%> 
+  </div>
+<div class="container">
+  </div>
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Précédentes destinations</th>
+        <th scope="col">Date</th>
+        <th scope="col">Prix total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @archived_bookings.each do |booking| %>
+        <tr>
+          <th scope="row"><%= link_to "#{booking.room.title} - #{booking.room.city}(#{booking.room.country})", room_path(booking.room) %></th>
+          <td>Du <%= booking.checkin %> au <%= booking.checkout %></td>
+          <td><%= booking.total_price %>€</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>        
+</div>

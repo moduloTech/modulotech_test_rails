@@ -1,0 +1,17 @@
+
+
+<%= simple_form_for(@room) do |f| %>
+ 
+  <div class="form-inputs">
+    <%= f.input :title , placeholder: 'Pogo, Cookies, Felix ?'%>
+    <%= f.input :description, placeholder: 'Describe him with love', class: "form-actions"%>
+    <%= f.input :price, placeholder: 'Sheep, Monkey, Dragon ?' %>
+    <%= f.input :address, placeholder: "Make sure it's a valid address" %>
+    <%= f.input :city, placeholder: "Make sure it's a valid address" %>
+    <%= f.input :country, as: :text%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary homebtn2" %>
+  </div>
+<% end %>
