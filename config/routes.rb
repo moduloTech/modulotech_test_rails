@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   root "rooms#index"
   resources :rooms do
-    resources :bookings, only: [:create,:delete]
+    resources :bookings, only: [:create]
   end
-
-  #resources :rooms, only: %i[index show]
+  resources :bookings, only:[:destroy]
+  get 'my_rooms', to: 'rooms#user_rooms'
+  get 'my_bookings', to: 'bookings#user_bookings'
 end
