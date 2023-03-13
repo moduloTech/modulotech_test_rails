@@ -5,41 +5,84 @@ User.find_or_create_by!(email: 'uno@test.test') { |u| u.password = '123456' }
 guest = User.find_or_create_by!(email: 'guest@test.test') { |u| u.password = '123456' }
 host = User.find_or_create_by!(email: 'host@test.test') { |u| u.password = '123456' }
 require 'faker'
-require 'geocoder'
 
-# Création de 20 utilisateurs avec des adresses e-mail aléatoires
+locations = {
+  "Paris" => {
+    "titre" => "Chambre sur les Champs-Élysées",
+    "adresse" => "Champs-Élysées, 75008 Paris",
+    "description" => "Chambre élégante et confortable sur l'avenue mythique de la capitale française, bordée d'arbres, de boutiques de luxe et de cafés"
+  },
+  "Marseille" => {
+    "titre" => "Studio au Vieux-Port",
+    "adresse" => "Vieux-Port, 13001 Marseille",
+    "description" => "Studio confortable avec vue sur le port historique de la ville, bordé de cafés et de restaurants de fruits de mer"
+  },
+  "Lyon" => {
+    "titre" => "Appartement Place Bellecour",
+    "adresse" => "Place Bellecour, 69002 Lyon",
+    "description" => "Appartement spacieux et lumineux avec vue sur la grande place publique au centre de Lyon, avec une statue équestre de Louis XIV"
+  },
+  "Toulouse" => {
+    "titre" => "Chambre Place du Capitole",
+    "adresse" => "Place du Capitole, 31000 Toulouse",
+    "description" => "Chambre confortable et lumineuse avec vue sur la place centrale de la ville, bordée de bâtiments historiques, de boutiques et de restaurants"
+  },
+  "Nice" => {
+    "titre" => "Chambre sur la Promenade des Anglais",
+    "adresse" => "Promenade des Anglais, 06000 Nice",
+    "description" => "Chambre confortable avec vue sur le bord de mer animé de Nice, avec des restaurants, des cafés et une vue sur la Méditerranée"
+  },
+  "Nantes" => {
+    "titre" => "Appartement moderne sur l'Île de Nantes",
+    "adresse" => "Île de Nantes, 44200 Nantes",
+    "description" => "Appartement moderne et spacieux dans une ancienne zone portuaire reconvertie en un quartier moderne avec des œuvres d'art contemporain"
+  },
+  "Strasbourg" => {
+    "titre" => "Chambre dans le quartier historique de la Petite France",
+    "adresse" => "Petite France, 67000 Strasbourg",
+    "description" => "Chambre confortable dans le quartier historique de la ville, avec des maisons à colombages, des rues pavées et des canaux"
+  },
+  "Montpellier" => {
+    "titre" => "Chambre sur la Place de la Comédie",
+    "adresse" => "Place de la Comédie, 34000 Montpellier",
+    "description" => "Chambre élégante avec vue sur la grande place piétonne de la ville, avec des cafés, des boutiques et un opéra"
+  },
+  "Bordeaux" => {
+    "titre" => "Chambre avec vue sur la Place de la Bourse",
+    "adresse" => "Place de la Bourse, 33000 Bordeaux",
+    "description" => "Chambre confortable avec vue sur la place historique de la ville, avec une fontaine et une vue sur la Garonne"
+  }
+  }
 
-hosts = []
-10.times do |index|
-  hosts << User.find_or_create_by(email: "host#{index}@test.test") { |u| u.password = '123456' }
+french_host = User.find_or_create_by(email: "french_host@test.test") { |u| u.password = '123456' }
+locations.each do |city, location|
+  Room.create( user_id: french_host.id,
+    title: location["titre"],
+    description: location["description"],
+    price: rand(50..500),
+    room_type: rand(0..3),
+    city: city,
+    country: "France",
+    address: location["adresse"])
 end
 
 guests = []
-30.times do |index|
+5.times do |index|
   guests << User.find_or_create_by(email: "guest#{index}@test.test") { |u| u.password = '123456' }
 end 
 
-hosts.each do |host|
-  location = Geocoder.search('Paris, France', params: { category: 'touristic', lang: 'fr', min_confidence: 0.6, max_rows: 5, 'rating.min': 4.5 }).sample
-  room = Room.create(
-    user_id: host.id,
-    title: location.address,
-    description: Faker::Lorem.paragraph_by_chars(number: 256, supplemental: false),
-    price: rand(50..500),
-    room_type: rand(0..3),
-    city: location.city,
-    country: location.country,
-    address: location.address)
-end
-
-guests.each do |guest|
-  room = Room.all.sample
-  Booking.create(
-    checkin: Faker::Date.between(from: 1.week.ago, to: Date.today),
-    checkout: Faker::Date.between(from: Date.tomorrow, to: 1.week.from_now),
-    room_id: room.id,
-    user_id: guest.id
-  )
+Room.where(country: 'France').each do |room|
+  sum = 0
+  guests.each do |guest|
+    sum += 2
+    Booking.create(
+      checkin: Date.new(2023,03, 01) + sum,
+      checkout: Date.new(2023,03, 03) + sum,
+      room_id: room.id,
+      user_id: guest.id,
+      total_price: room.price * 2
+    )
+  end
 end
 
 guests.each do |guest|
@@ -48,3 +91,4 @@ guests.each do |guest|
     booking.user.reviews.create(review_type: 0, comment: 'Très bon invité très sympa!', rating: 5, writer_id: booking.room.user_id)
   end
 end
+
