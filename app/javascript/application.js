@@ -11,16 +11,15 @@ popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl)
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    flatpickr("#start_date", {
-      mode: "range",
-      dateFormat: "Y-m-d H:i",
-      onChange: [function(selectedDates){
-        const dateArr = selectedDates.map(date => this.formatDate(date, "Y-m-d"))
-        const difference = Date.parse(dateArr[1]) - Date.parse(dateArr[0])
-        const totalDays = Math.ceil(difference / (1000 * 3600 * 24));
-        console.log(totalDays + ' days')
-    }]
+let flatpickrTriggerList = Array.from(document.querySelectorAll('[data-controller="flatpickr"]'));
+flatpickrTriggerList.map(function (ca) {
+    const end_date = document.querySelector('#end_date');
+    const totalPrice = document.querySelector('#totalprice');
+    const roomPrice = document.querySelector('#room-price').dataset.price;
+    const bookingForm = document.getElementById('booking-form-div');
+    const bookings = JSON.parse(bookingForm.dataset.bookings);
+    new flatpickr(ca, {
+            mode: "range",
+            dateFormat: "Y-m-d H:i",
+          })
     });
-  });
-
