@@ -31,3 +31,4 @@
 
 en:
   hello: "Hello world"
+  alert: "You are not authorized to perform this action."
