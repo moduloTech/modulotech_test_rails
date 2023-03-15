@@ -16,6 +16,8 @@ RUN gem install bundler -v 2.4.7
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --jobs=2
+RUN bundle exec rails db:drop db:create db:migrate db:seed
+RUN bundle exec rails assets:precompile DB_ADAPTER=nulldb NODE_ENV=development RAILS_ENV=staging SECRET_KEY_BASE=123
 
 COPY . .
 
