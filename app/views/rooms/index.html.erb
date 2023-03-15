@@ -1,20 +1,46 @@
+
 <h1>Choisissez votre destination</h1>
 <!-- TODO: Display rooms available for booking -->
-<div class="container d-flex justify-content-around">
-  <% @available_rooms.each_slice(6) do |rooms| %>
-    <div class="row">
-      <% rooms.each do |room| %>
-        <div class="card col-md-3" style="width: 18rem;">
-          <%= image_tag("pic.jpg") %>
-          <div class="card-body">
-            <h5 class="card-title"><%= room.title %></h5>
-            <p class="card-text"><%= room.description %></p>
-            <%= link_to "Réserver ", room, class: "btn btn-primary" %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  <%end%> 
+<% if @search_terms[:query] %>
+  <h1>Résultat pour <%= @search_terms[:query] %></h1>
+<% end %>
+
+<% if @search_terms[:check_in] && @search_terms[:check_out] %>
+  <h1>Un séjour du <%= @search_terms[:check_in] %> au <%= @search_terms[:check_out] %></h1>
+<% end %>
+
+<div class="album text-muted">
+   <div class="container">
+      <div class="row">
+         <% @available_rooms.each do |room| %>
+          <%= link_to room_path(room),class:"col-md-3 text-decoration-none", style:"color:black" do %>
+              <div class="card mb-3 border-0">
+                <% if room.image.attached? %>
+                  <%= image_tag room.image, class:"card-img-top br0", size: '260x220' %>
+                <% else %>
+                  <img
+                    src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                    class="card-img-top br0"
+                    width="260" height="220"
+                  />
+                <% end %>
+                <p class="small text-uppercase pb-0"><%= room.city %></p>
+                <div class="card-body p-0">
+                  <h5 class="card-title"><%= room.title %></h5>
+                  <p class="card-text m-0">€<%= room.price.to_i %>/nuit</p>
+                  <p class="small m-0 text-info">
+                    &#9733;&#9733;&#9733;&#9733;&#9733;<span class="text-secondary">
+                      <%= room.calculate_average_rating %>, Superhost</span>
+                  </p>
+                </div>
+              </div>
+          <% end %>
+         <% end %>
+      </div>
+   </div>
 </div>
 
 
+<script type="text/javascript">
+
+</script>

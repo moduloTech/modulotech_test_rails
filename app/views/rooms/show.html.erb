@@ -1,52 +1,73 @@
+
 <div class="container">
-  <!-- IMAGES -->
-  <div class="title-results">
-    <h1>"<%= "#{@room.title.upcase}"%>"</h1> <br>
-  </div>
-
-  <!-- DETAILS -->
-  <div class="info-form">
-    <div class="info-show">
-      <div class="details-show">
-        <ul style="list-style-type:none; ">
-          <li><i class="fas fa-paw"></i> Description: <%= @room.description %></li> <br>
-          <li><i class="far fa-address-card"></i> Contact: <%= @room.user.email %></li><br>
-          <li><i class="fas fa-globe-asia"></i> Location: <%= @room.address %></li><br>
-          <li></li>
-        </ul>
+      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-6 px-0">
+          <h1 class="display-4 font-italic"><%= "#{@room.title.upcase}"%></h1>
+          <p class="lead my-3"><%= "#{@room.description}"%></p>
+          <p class="lead mb-0"><a class="text-white font-weight-bold"><%= "#{@room.city}"%></a></p>
+        </div>
       </div>
-      <div class="reviews">
-        <h3><strong>Reviews :</strong></h3>
-          <p>Price : <span id="price"> <%= @room.price %> </span> €/day</p>
+
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+              <h3 class="mb-0">
+                <a class="text-dark" href="#"><%= "#{@room.room_type}"%></a>
+              </h3>
+              <div class="mb-1 text-muted">2 voyageurs - 1 chambre - 1 lit - 1 salle de bain</div>
+              <ul class="card-text mb-auto">
+                <li>Arrivée autonome: <small>Vous pouvez entrer dans les lieux avec une boîte à clé sécurisée.</small></li>
+                <li>Annulation gratuite avant le 16 juin.</li>
+              </ul>
+            </div>
+            <%= image_tag @room.image, class:"card-img-right flex-auto d-none d-md-block", size: '260x220' %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+              <strong class="d-inline-block mb-2 text-success">Superhôte</strong>
+              <h3 class="mb-0">
+                <a class="text-dark" href="#">Votre hôte</a>
+              </h3>
+              <div class="mb-1 text-muted">Nov 11</div>
+              <p class="card-text mb-auto">Florent est Superhôte</p>
+              <small class="card-text mb-auto"> Les Superhôtes sont des hôtes expérimentés qui bénéficient de très bonnes évaluations et qui s'engagent à offrir d'excellents séjours aux voyageurs.</small>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="form-show">
-      <h1> BOOK ME !</h1>
-      
-      <%= simple_form_for [@room, @booking] do |f| %>
-        <%= f.input :checkin, as: :string,
-                wrapper_html: { class: "mb-4" },
-                label_html: { class: "form-label text-secondary fw-bold" },
-                input_html: { id: "start_date", data: { controller: "flatpickr" } } %>
-        <%= f.input :checkout, label:false, as: :string, required: false, input_html: {id: "end_date", class: "dnone", value:"toto"}%>
-        <br>
-        <h1><small>TOTAL:</small>
-        <span id='totalprice'>0</span>€
-        </h1>
-        <br>
-        <%= f.submit class: "btn btn-primary homebtn2" %>
-      <% end %>
-    </div>
-  </div>
-</div>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8 blog-main">
+          <h3 class="pb-3 mb-4 font-italic border-bottom">
+            Equipements disponible
+          </h3>
 
-<div id="booking-form-div"
-    data-bookings="<%= @bookings_dates.to_json %>">
-</div>
-<div id="room-price"
-    data-price="<%= @room.price %>">
-</div>
-
-<script type="text/javascript">
-
-</script>
+        </div>
+        <aside class="col-md-4 blog-sidebar">
+          <div class="p-3 mb-3 bg-light rounded">
+            <h4 class="font-italic">Réservez votre séjour</h4>
+            <%= simple_form_for [@room, @booking] do |f| %>
+              <%= f.input :checkin, label:"Check-in le: ",as: :date, html5: true, :required => true%>
+              <%= f.input :checkout, label:"Check-out le: ",as: :date, html5: true, :required => true%>
+              <br>
+              <h1><small>Total:</small>
+              <span id='totalprice'>0</span>€
+              </h1>
+              <br>
+              <%= f.submit "Réservez", class: "btn btn-primary homebtn2" %>
+            <% end %>
+            <p class="mb-0"></p>
+          </div>
+        </aside>
+      </div>
+      <div id="booking-form-div"
+          data-bookings="<%= @bookings_dates.to_json %>">
+      </div>
+      <div id="room-price"
+          data-price="<%= @room.price %>">
+      </div>
+    </main>

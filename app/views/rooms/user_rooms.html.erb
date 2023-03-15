@@ -1,17 +1,112 @@
 
+<div class="container">
+      <div class="py-5 text-center">
+        <h2>Vos logements</h2>Envie de mettre son logement en location?</p>
+      </div>
+      <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Mettez un nouveau logement à louer</span>
+            <span class="badge badge-secondary badge-pill">3</span>
+          </h4>
+          <%= simple_form_for(@room) do |f| %>
+            <ul class="list-group mb-3">
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Nom de votre logement</h6>
+                  <small><%= f.input :title, required:true, label: false, class: "text-muted"%></small>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Description</h6>
+                  <%= f.input :description, label: false, class: "text-muted"%>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Prix</h6>
+                  <%= f.input :price, label: false, class: "text-muted"%>
+                </div>
+                <span class="text-muted">(par nuit)</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Adresse</h6>
+                  <%= f.input :address, label: false, class: "text-muted"%>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Ville</h6>
+                  <%= f.input :city, label: false, class: "text-muted"%>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Pays</h6>
+                  <%= f.input :country, as: :string, label: false, class: "text-muted"%>
+                </div>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <%= f.button :submit, class: "btn btn-primary homebtn2" %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+        <div class="col-md-8 order-md-1">
+          <% @rooms_as_host.each do |room| %>
+            <%= form_for room do |f|%>
+              <h4 class="mb-3"><%= room.title %></h4>
+              <form class="needs-validation" novalidate="">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="description">Description</label>
+                    <%= f.text_field :description, class: "form-control", disabled: true %>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="lastName">Prix par nuit(€)</label>
+                    <%= f.text_field :price, class: "form-control", disabled: true %>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="username">Contact pour ce logement</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">@</span>
+                    </div>
+                    <%= f.text_field :n, value: room.user.email,class: "form-control", disabled: true %>  
+                  </div>
+                </div>
 
-<%= simple_form_for(@room) do |f| %>
- 
-  <div class="form-inputs">
-    <%= f.input :title , placeholder: 'Pogo, Cookies, Felix ?'%>
-    <%= f.input :description, placeholder: 'Describe him with love', class: "form-actions"%>
-    <%= f.input :price, placeholder: 'Sheep, Monkey, Dragon ?' %>
-    <%= f.input :address, placeholder: "Make sure it's a valid address" %>
-    <%= f.input :city, placeholder: "Make sure it's a valid address" %>
-    <%= f.input :country, as: :text%>
-  </div>
+                <div class="mb-3">
+                  <label for="email">Adresse</label>
+                    <%= f.text_field :address, class: "form-control", disabled: true %>  
+                </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-primary homebtn2" %>
-  </div>
-<% end %>
+                <div class="mb-3">
+                  <label for="address">Ville</label>
+                    <%= f.text_field :city, class: "form-control", disabled: true %>  
+                </div>
+
+                <div class="mb-3">
+                  <label for="address2">Pays</label>
+                    <%= f.text_field :country, class: "form-control", disabled: true %>  
+                </div>
+                <%= link_to "Retirer la chambre", room, class: "btn btn-danger",data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+                <hr class="mb-4">
+              </form>
+            <%end %>
+          <% end %>
+        </div>
+      </div>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">© 2017-2018 Company Name</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+      </footer>
+    </div>
