@@ -1,10 +1,9 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
-User.find_or_create_by!(email: 'uno@test.test') { |u| u.password = '123456' }
+user = User.find_or_create_by!(email: 'uno@test.test') { |u| u.password = '123456' }
 guest = User.find_or_create_by!(email: 'guest@test.test') { |u| u.password = '123456' }
 host = User.find_or_create_by!(email: 'host@test.test') { |u| u.password = '123456' }
-require 'faker'
 
 locations = {
   "Paris" => {
@@ -54,6 +53,18 @@ locations = {
   }
   }
 
+  locations_spain = {
+    "Barcelone" => {
+      "titre" => "Appartement dans le quartier gothique",
+      "adresse" => "Carrer de la Ciutat, 08002 Barcelona",
+      "description" => "Appartement confortable situé dans le quartier gothique de Barcelone, avec ses rues étroites et ses bâtiments historiques"
+    },
+    "Madrid" => {
+      "titre" => "Appartement sur la Gran Via",
+      "adresse" => "Gran Via, Madrid, 28013",
+      "description" => "Appartement élégant avec vue sur la célèbre Gran Via de Madrid, à proximité des attractions touristiques telles que le Palais royal et le musée du Prado"
+    }
+  }
 french_host = User.find_or_create_by(email: "french_host@test.test") { |u| u.password = '123456' }
 locations.each do |city, location|
   Room.create( user_id: french_host.id,
@@ -65,6 +76,34 @@ locations.each do |city, location|
     country: "France",
     address: location["adresse"])
 end
+
+locations_spain.each do |city, location|
+  Room.create( user_id: user.id,
+    title: location["titre"],
+    description: location["description"],
+    price: rand(50..500),
+    room_type: rand(0..3),
+    city: city,
+    country: "Espagne",
+    address: location["adresse"])
+end
+
+Booking.create(
+  checkin: Date.new(2023,03, 01),
+  checkout: Date.new(2023,03, 03),
+  room_id: Room.first.id,
+  user_id: user.id,
+  total_price: Room.first.price * 2
+)
+
+Booking.create(
+  checkin: Date.new(2023,04, 01),
+  checkout: Date.new(2023,04, 03),
+  room_id: Room.last.id,
+  user_id: user.id,
+  total_price: Room.last.price * 2
+)
+
 
 guests = []
 5.times do |index|
@@ -84,6 +123,16 @@ Room.where(country: 'France').each do |room|
     )
   end
 end
+
+Room.all.each do |room|
+  file = File.join("app/assets/images/#{room.city.downcase}.jpg")
+  if File.exist?(file)
+    room.image.attach(io: File.open(file), filename:"#{room.city.downcase}.jpg")
+  else
+    room.image.attach(io: File.open("app/assets/images/pic.jpg"), filename:"pic.jpg")
+  end
+end
+
 
 guests.each do |guest|
   guest.bookings.each do |booking|
