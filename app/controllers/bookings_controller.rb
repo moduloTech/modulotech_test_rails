@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
   def create
     @room = Room.find(params[:room_id])
     @booking = Booking.new(booking_params)
-    @booking.total_price = (booking_params[:checkout].to_date - booking_params[:checkin].to_date).to_i * @room.price
+    @booking.total_price = calculate_total_price
     @booking.room_id = @room.id
     @booking.user = current_user
     authorize @booking
@@ -23,6 +23,10 @@ class BookingsController < ApplicationController
   end
 
   private
+
+  def calculate_total_price
+    (booking_params[:checkout].to_date - booking_params[:checkin].to_date).to_i * @room.price
+  end
 
   def booking_params
     params.require(:booking).permit(:checkin, :checkout, :user_id, :room_id, :review, :rating)

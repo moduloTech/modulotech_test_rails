@@ -5,7 +5,7 @@ class RoomsController < ApplicationController
   def index
     @rooms = policy_scope(Room)
     @availables_rooms = get_available_rooms(params[:checkin], params[:checkout], params[:query])
-    @search_terms = { check_in: params[:checkin], check_out: params[:checkout], query: params[:query] }
+    @queries = { check_in: params[:checkin], check_out: params[:checkout], query: params[:query] }
   end
 
   def show
@@ -45,7 +45,8 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:title, :description, :price, :room_type, :city, :country, :address, :user_id, :image)
+    params.require(:room).permit(:title, :description, :price, :room_type, :city, :country,
+                                 :address)
   end
 
   def get_available_rooms(check_in, check_out, query)

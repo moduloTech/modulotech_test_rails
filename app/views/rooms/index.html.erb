@@ -1,12 +1,12 @@
 
 <h1>Choisissez votre destination</h1>
 <!-- TODO: Display rooms available for booking -->
-<% if @search_terms[:query] %>
-  <h1>Résultat pour <%= @search_terms[:query] %></h1>
+<% if @queries[:query] %>
+  <h1>Résultat pour <%= @queries[:query] %></h1>
 <% end %>
 
-<% if @search_terms[:check_in] && @search_terms[:check_out] %>
-  <h1>Un séjour du <%= @search_terms[:check_in] %> au <%= @search_terms[:check_out] %></h1>
+<% if @queries[:check_in] && @queries[:check_out] %>
+  <h1>Un séjour du <%= @queries[:check_in] %> au <%= @queries[:check_out] %></h1>
 <% end %>
 
 <div class="album text-muted">
