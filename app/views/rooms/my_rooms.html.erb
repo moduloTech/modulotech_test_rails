@@ -1,18 +1,25 @@
-<!-- TODO: Display rooms available for booking -->
-
 <div class="container-fluid">
   <% if @rooms.blank? %>
     <div class="row">
       <div class="col-md-12 text-center">
-        <p>No available rooms.</p>
+        <p>You have no rooms. <%= link_to "Add room", new_room_path, class: "link-primary" %>
+        </p>
       </div>
     </div>
   <% else %>
+    <div class="d-flex justify-content-between align-items-end">
+      <h2>My Rooms</h2>
+      <h6><%= link_to "+ Add room", new_room_path, class: "link-primary" %></h6>
+    </div>
     <div class="d-flex">
       <% @rooms.each do |room| %>
         <%= link_to room_path(room) do %>
           <div class="card">
             <%= image_tag(url_for(room.images.first), class: "card-img-top") %>
+            <div class="card-actions">
+              <%= link_to "Edit", edit_room_path(room), class: "btn btn-primary btn-sm text-white" %>
+              <%= button_to "Delete", room_path(room), method: :delete, class: "btn btn-danger btn-sm" %>
+            </div>
             <div class="card-body">
               <h5 class="card-title"><%= room.name %></h5>
               <p class="card-text"><%= room.address.city %>, <%= room.address.street %></p>

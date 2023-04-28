@@ -16,3 +16,76 @@
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+a,
+a:hover,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.navbar-collapse {
+  .btn {
+    align-self: flex-end;
+  }
+
+  label {
+    margin-right: 10px;
+  }
+}
+
+.navbar-right {
+  align-self: flex-start;
+}
+
+.card {
+  position: relative;
+  width: 18rem;
+  margin-right: 10px;
+
+  .card-actions {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .btn {
+      margin: 10px 5px;
+    }
+  }
+
+  &:hover {
+    .card-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.image-container {
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+}

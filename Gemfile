@@ -73,7 +73,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
-
-gem "modulorails"
+gem 'modulorails', '= 1.3.2'
 
 gem "devise"

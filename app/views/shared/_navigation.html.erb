@@ -1,26 +1,24 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg mb-4">
   <div class="container-fluid">
     <a class="navbar-brand" href="<%= root_path %>">MtBnb</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- TODO: Implement this search -->
-      <form class="d-flex gap-2" role="search">
-        <label class="form-label">
-          Where
-          <input class="form-control me-2" type="search" placeholder="Search destinations" aria-label="Search destinations">
-        </label>
-        <label class="form-label">
-          Check in
-          <input class="form-control me-2" type="date" aria-label="Check in">
-        </label>
-        <label class="form-label">
-          Check out
-          <input class="form-control me-2" type="date" aria-label="Check out">
-        </label>
-        <button class="btn btn-primary" type="submit">Search</button>
-      </form>
+
+      <%= form_with url: rooms_path, method: :get, id: 'navbarSupportedContent', class: 'collapse navbar-collapse' do |form| %>
+        <%= form.label :class => 'form-label' do %>
+          Where <%= form.text_field :location, :class => 'form-control', value: params[:location], placeholder: "Enter city" %>
+        <% end %>
+        <%= form.label :class => 'form-label' do %>
+          Check in <%= form.date_field :start_date, :class => 'form-control', value: params[:start_date] %>
+        <% end %>
+        <%= form.label :class => 'form-label' do %>
+          Check out <%= form.date_field :end_date, :class => 'form-control', value: params[:end_date] %>
+        <% end %>
+        <%= form.submit "Search", :class => 'btn btn-primary' %>
+      <% end %>
 
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
@@ -49,7 +47,7 @@
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to 'Sign in', new_user_session_path %>
+            <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-primary' %>
           </li>
         <% end %>
       </ul>

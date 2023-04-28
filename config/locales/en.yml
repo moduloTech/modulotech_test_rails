@@ -30,4 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  reservations:
+    created: "Reservation was successfully created."
+    deleted: "Reservation was removed."
+    error: "Could not create reservation."
+  rooms:
+    created: "Room was successfully created."
+    deleted: "Room was removed."
