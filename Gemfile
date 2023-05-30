@@ -74,6 +74,7 @@ group :test do
   gem "webdrivers"
 end
 
-gem 'modulorails', '= 1.3.2'
+# TODO: remove this comment before release
+# gem 'modulorails', '= 1.3.2'
 
 gem "devise"
