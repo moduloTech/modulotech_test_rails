@@ -1,14 +1,14 @@
 development: &default
   adapter: postgresql
-  database: <%= ENV.fetch('MODULOTECH-TEST-RAILS_DATABASE_NAME', 'modulotech-test-rails') %>
-  username: <%= ENV.fetch('MODULOTECH-TEST-RAILS_DATABASE_USERNAME', 'postgres') %>
-  password: <%= ENV.fetch('MODULOTECH-TEST-RAILS_DATABASE_PASSWORD', 'postgres') %>
-  host: <%= ENV.fetch('MODULOTECH-TEST-RAILS_DATABASE_HOST', 'database') %>
-  port: <%= ENV.fetch('MODULOTECH-TEST-RAILS_DATABASE_PORT', 5432) %>
+  database: <%= ENV.fetch('MODULOTECH_TEST_RAILS_DATABASE_NAME', 'modulotech-test-rails') %>
+  username: <%= ENV.fetch('MODULOTECH_TEST_RAILS_DATABASE_USERNAME', 'postgres') %>
+  password: <%= ENV.fetch('MODULOTECH_TEST_RAILS_DATABASE_PASSWORD', 'postgres') %>
+  host: <%= ENV.fetch('MODULOTECH_TEST_RAILS_DATABASE_HOST', 'database') %>
+  port: <%= ENV.fetch('MODULOTECH_TEST_RAILS_DATABASE_PORT', 5432) %>
 
 test:
   <<: *default
-  database: <%= ENV.fetch('MODULOTECH-TEST-RAILS_TEST_DATABASE_NAME', 'modulotech-test-rails_test') %>
+  database: <%= ENV.fetch('MODULOTECH_TEST_RAILS_TEST_DATABASE_NAME', 'modulotech-test-rails_test') %>
 
 staging:
   <<: *default

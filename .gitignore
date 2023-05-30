@@ -26,9 +26,16 @@
 !/tmp/storage/.keep
 
 /public/assets
+/node_modules
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
 # Ignore Rubymine files
 .idea
+
+.env.*
+.tool-versions
+package-lock.json
+package.json
+yarn.lock
