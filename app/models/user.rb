@@ -5,4 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+
+  def booked_rooms
+    Room.all
+  end
+
 end
