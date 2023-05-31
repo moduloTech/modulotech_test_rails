@@ -1,2 +1,5 @@
 one:
+  name: A cozy room in the old mansion
+  location: 'New York'
+  price: 1000
   created_at: 31/05/2023 00:00:00

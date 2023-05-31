@@ -8,8 +8,11 @@ class RoomsIndexTest < ApplicationSystemTestCase
   test "viewing rooms" do
     visit rooms_path
     assert_selector "h1", text: "Rooms"
-    @rooms.each do
-      assert_text @room.title
+    @rooms.each do |room|
+      assert_text room.name
+      assert_text room.location
+      # assert_text room.pictures
+      assert_text room.price
     end
   end
 end
