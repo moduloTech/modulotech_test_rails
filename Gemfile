@@ -59,6 +59,8 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'pry'
   gem 'awesome_print'
+  gem 'rubocop', require: false
+  gem 'power_assert'
 end
 
 group :development do

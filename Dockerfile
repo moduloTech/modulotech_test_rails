@@ -11,7 +11,8 @@ RUN apk add --update --no-cache \
     tzdata \
     gcompat \
     vim \
-    postgresql-dev
+    postgresql-dev \
+    firefox-esr
 RUN gem install bundler -v 2.4.7
 
 COPY Gemfile Gemfile.lock ./
