@@ -1,0 +1,7 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room: one
+  user: one
+  from: 2023-05-31 18:19:28
+  to: 2023-05-31 18:19:28
