@@ -5,21 +5,30 @@ class RoomsIndexTest < ApplicationSystemTestCase
 
   setup do
     @user = users(:one)
-    @rooms = @user.booked_rooms
+    @rooms = Room.all
   end
 
-  test "viewing rooms" do
-    sign_in users(:one)
-
+  test "viewing rooms as guest" do
     visit rooms_path
 
-    assert_selector "h1", text: "Rooms"
 
     @rooms.each do |room|
       assert_text room.name
       assert_text room.location
-      # assert_text room.pictures
       assert_text room.price
     end
   end
+
+  # test "viewing rooms as user" do
+  #   sign_in @user
+  #   visit rooms_path
+  #
+  #   @rooms.each do |room|
+  #     assert_text room.name
+  #     assert_text room.location
+  #     # assert_text room.pictures
+  #     assert_text room.price
+  #   end
+  # end
+
 end

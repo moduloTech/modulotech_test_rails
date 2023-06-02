@@ -3,6 +3,6 @@
 <!-- TODO: Display rooms available for booking -->
 <ul>
   <% @rooms.each do |room| %>
-    <li><%= room.location %> | <%= room.name %> | <%= room.price %> < </li>
+    <li><%= room.location %> | <%= room.name %> | <%= room.price %>&nbsp;<%= link_to 'Book it!', room_path(room) %></li>
   <% end %>
 </ul>
