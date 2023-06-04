@@ -1,9 +1,51 @@
-<h1>Rooms#show</h1>
-<p>Find me in app/views/rooms/show.html.erb</p>
 <!-- TODO: Display room data: Name, Location, Picture(s), Price per night -->
 <!-- TODO: Allow to reserve the room for various periods of time -->
-<div>Room</div>
-<div><%= @room.id %></div>
-<div><%= @room.name %></div>
-<div><%= @room.location %></div>
-<div><%= @room.price %></div>
+
+<div class="card border-dark">
+  <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="..." class="d-block w-100 img-fluid rounded-start" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="..." class="d-block w-100 img-fluid rounded-start" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="..." class="d-block w-100 img-fluid rounded-start" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= @room.name %></h5>
+    <h6 class="card-subtitle mb-2 text-muted"><%= @room.location %></h6>
+    <p class="card-text">description will be here</p>
+    <h5 class="card-text text-end"><%= @room.price %> per night</h5>
+  </div>
+  <div class="card-footer bg-primary">
+    <%= form_for(Booking.new) do |form| %>
+      <%= form.hidden_field :room_id %>
+      <div class="input-group">
+        <span class="input-group-text">from</span>
+        <%= form.date_field :from, class: 'form-control', 'aria-label' => 'from', 'aria-describedby' => 'basic-addon1' %>
+        </span>
+        <span class="input-group-text">to</span>
+        <%= form.date_field :to, class: 'form-control', 'aria-label' => 'to', 'aria-describedby' => 'basic-addon1' %>
+        </span>
+        <%= form.button "Book it!", type: "submit", :class => "btn btn-dark" %>
+      </div>
+    <% end %>
+  </div>
+</div>
