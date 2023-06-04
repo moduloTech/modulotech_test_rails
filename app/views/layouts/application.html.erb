@@ -13,6 +13,12 @@
   <body>
     <%= render partial: 'shared/navigation' %>
 
+    <% if success.present? %>
+      <div role="alert" class="alert alert-success fade show">
+        <%= success %>
+      </div>
+    <% end %>
+
     <% if notice.present? %>
       <div role="alert" class="alert alert-info alert-dismissible fade show">
         <%= notice %>
@@ -20,9 +26,9 @@
       </div>
     <% end %>
 
-    <% if alert.present? %>
+    <% if alert.present? || error.present? %>
       <div role="alert" class="alert alert-warning alert-dismissible fade show">
-        <%= alert %>
+        <%= alert || error %>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <% end %>

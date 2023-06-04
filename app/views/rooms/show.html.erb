@@ -1,7 +1,6 @@
-<!-- TODO: Display room data: Name, Location, Picture(s), Price per night -->
 <!-- TODO: Allow to reserve the room for various periods of time -->
 
-<div class="card border-dark">
+<div class="col-md-12 card border-dark">
   <% if @room.images.present? %>
   <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
@@ -31,7 +30,7 @@
   </div>
   <div class="card-footer bg-primary">
     <%= form_for(Booking.new) do |form| %>
-      <%= form.hidden_field :room_id %>
+      <%= form.hidden_field :room_id, value: @room.id %>
       <div class="input-group">
         <span class="input-group-text">from</span>
         <%= form.date_field :from, class: 'form-control', 'aria-label' => 'from', 'aria-describedby' => 'basic-addon1' %>
