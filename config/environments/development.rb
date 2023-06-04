@@ -18,7 +18,7 @@ Rails.application.configure do
   config.server_timing = true
 
   config.public_file_server.enabled = true
-  
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
