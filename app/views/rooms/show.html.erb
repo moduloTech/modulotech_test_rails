@@ -2,22 +2,14 @@
 <!-- TODO: Allow to reserve the room for various periods of time -->
 
 <div class="card border-dark">
+  <% if @room.images.present? %>
   <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
     <div class="carousel-inner">
+      <% @room.images.each do |img| %>
       <div class="carousel-item active">
-        <img src="..." class="d-block w-100 img-fluid rounded-start" alt="...">
+        <%= image_tag url_for(img), class: 'd-block w-100 img-fluid rounded-start'  %>
       </div>
-      <div class="carousel-item">
-        <img src="..." class="d-block w-100 img-fluid rounded-start" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="..." class="d-block w-100 img-fluid rounded-start" alt="...">
-      </div>
+      <% end %>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -28,6 +20,9 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+  <% else %>
+    <img src="" class="img-fluid rounded-start" alt="...">
+  <% end %>
   <div class="card-body">
     <h5 class="card-title"><%= @room.name %></h5>
     <h6 class="card-subtitle mb-2 text-muted"><%= @room.location %></h6>
