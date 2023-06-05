@@ -1,26 +1,18 @@
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="<%= root_path %>">B👁️👁️king!</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-      <!-- TODO: Implement this search -->
-      <form class="d-flex gap-2" role="search">
-        <label class="form-label">
-          Where
-          <input class="form-control me-2" type="search" placeholder="Search destinations" aria-label="Search destinations">
-        </label>
-        <label class="form-label">
-          Check in
-          <input class="form-control me-2" type="date" aria-label="Check in">
-        </label>
-        <label class="form-label">
-          Check out
-          <input class="form-control me-2" type="date" aria-label="Check out">
-        </label>
-        <button class="btn btn-primary" type="submit">Search</button>
-      </form>
+      <!-- TODO: Implement this search
+      <%= form_with url: rooms_path, class: 'd-flex gap-2', role: 'search' do |form| %>
+        <div class="input-group">
+          <%= form.text_field :location, class: 'form-control', value: params[:location], placeholder: "City" %>
+          <span class="input-group-text">from</span>
+          <%= form.date_field :from, :class => 'form-control', value: params[:from] %>
+          <span class="input-group-text">to</span>
+          <%= form.date_field :to, :class => 'form-control', value: params[:to] %>
+          <%= form.submit "Find!", :class => 'btn btn-primary' %>
+        </div>
+      <% end %>
 
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
