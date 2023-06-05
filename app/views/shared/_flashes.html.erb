@@ -1,0 +1,22 @@
+<% if success.present? %>
+  <div role="alert" class="alert alert-success fade show">
+    <%= success %>
+  </div>
+<% end %>
+
+<% ([error.presence] || [alert.presence]).flatten.each do |message| %>
+  <% if message %>
+    <div role="alert" class="alert alert-warning alert-dismissible fade show">
+      <%= message %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+<% end %>
+
+<% if notice.present? %>
+  <div role="alert" class="alert alert-info alert-dismissible fade show">
+    <%= notice %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
+

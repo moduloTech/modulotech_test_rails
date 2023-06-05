@@ -1,40 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Boo king!</title>
-    <meta name="viewport" content="width=device-width, height=device-heigth, initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Boo king!</title>
+  <meta name="viewport" content="width=device-width, height=device-heigth, initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
 
-  <body>
-    <%= render partial: 'shared/navigation' %>
+<body>
+<%= render partial: 'shared/navigation' %>
+<%= render partial: 'shared/flashes' %>
 
-    <% if success.present? %>
-      <div role="alert" class="alert alert-success fade show">
-        <%= success %>
-      </div>
-    <% end %>
-
-    <% if notice.present? %>
-      <div role="alert" class="alert alert-info alert-dismissible fade show">
-        <%= notice %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
-
-    <% if alert.present? || error.present? %>
-      <div role="alert" class="alert alert-warning alert-dismissible fade show">
-        <%= alert || error %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
-
-    <div class="container">
-      <%= yield %>
-    </div>
-  </body>
+<div class="container">
+  <%= yield %>
+</div>
+</body>
 </html>
