@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
     @rooms = Room.all
 
     if params[:from].present? && params[:to].present?
-      @rooms = Room.booked(params[:from], params[:to])
+      @rooms = Room.not_booked(params[:from], params[:to])
     end
 
     @rooms = @rooms.where(location: params[:location]) if params[:location].present?

@@ -1,7 +1,9 @@
 # TODO: Add features to this model to implement the other TODO.
 class Room < ApplicationRecord
-  scope :booked, ->(from, to) { where(id: Booking.booked(from,to)) }
-  scope :not_booked, ->(from, to) { where.not(id: Booking.booked(from,to)) }
+  scope :booked, ->(from, to) { where(id: Booking.booked(from,to)).pluck(:room_id).uniq }
+  scope :not_booked, ->(from, to) { where.not(id: Booking.booked(from,to).pluck(:room_id).uniq) }
+
+  has_many :bookings
 
   monetize :price_cents
 

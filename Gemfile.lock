@@ -136,6 +136,9 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.2)
     minitest (5.17.0)
+    minitest-power_assert (0.3.1)
+      minitest
+      power_assert (>= 1.1)
     monetize (1.12.0)
       money (~> 6.12)
     money (6.16.0)
@@ -291,9 +294,9 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
+  minitest-power_assert
   money-rails (~> 1.12)
   pg (~> 1.1)
-  power_assert
   pry
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.2)

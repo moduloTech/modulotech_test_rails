@@ -64,7 +64,7 @@ group :development, :test do
   gem 'pry'
   gem 'awesome_print'
   gem 'rubocop', require: false
-  gem 'power_assert'
+  gem 'minitest-power_assert'
 end
 
 group :development do
