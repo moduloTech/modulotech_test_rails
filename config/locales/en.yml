@@ -32,5 +32,8 @@
 en:
   errors:
     already_booked: 'Booking failed. This room already booked in those dates'
+    booking_in_past: 'Booking failed. You can''t book on dates that pass already'
+    to_must_be_above_from: 'Booking failed. To date must be above From date'
+
   messages:
     booking_success: 'Congrats! You have booked a room!'
