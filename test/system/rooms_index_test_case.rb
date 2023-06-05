@@ -14,10 +14,16 @@ class RoomsIndexTest < ApplicationSystemTestCase
     @rooms.each do |room|
       assert_text room.name
       assert_text room.location
-      assert_text room.price
+      assert_text room.price.to_i
     end
   end
 
+  test "rooms search by location" do
+    room = rooms(:foo)
+    visit rooms_path(location: room.location)
+
+    assert_text room.name
+  end
   # test "viewing rooms as user" do
   #   sign_in @user
   #   visit rooms_path

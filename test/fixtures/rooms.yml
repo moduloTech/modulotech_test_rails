@@ -3,3 +3,9 @@ one:
   location: 'New York'
   price_cents: 1000
   created_at: 31/05/2023 00:00:00
+
+foo:
+  name: Foo
+  location: Bar
+  price_cents: 1000
+  created_at: 31/05/2023 00:00:00
