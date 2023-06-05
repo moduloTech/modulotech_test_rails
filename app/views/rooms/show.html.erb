@@ -33,10 +33,10 @@
       <%= form.hidden_field :room_id, value: @room.id %>
       <div class="input-group">
         <span class="input-group-text">from</span>
-        <%= form.date_field :from, class: 'form-control', 'aria-label' => 'from', 'aria-describedby' => 'basic-addon1' %>
+        <%= form.date_field :from, class: 'form-control', value: Date.today %>
         </span>
         <span class="input-group-text">to</span>
-        <%= form.date_field :to, class: 'form-control', 'aria-label' => 'to', 'aria-describedby' => 'basic-addon1' %>
+        <%= form.date_field :to, class: 'form-control', value: Date.tomorrow %>
         </span>
         <%= form.button "Book it!", type: "submit", :class => "btn btn-dark" %>
       </div>
