@@ -3,7 +3,7 @@
     <a class="navbar-brand" href="<%= root_path %>">B👁️👁️king!</a>
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
       <!-- TODO: Implement this search -->
-      <%= form_with url: rooms_path, class: 'd-flex gap-2', role: 'search' do |form| %>
+      <%= form_with url: rooms_path, method: :get, class: 'd-flex gap-2', role: 'search' do |form| %>
         <div class="input-group">
           <%= form.text_field :location, class: 'form-control', value: params[:location], placeholder: "City" %>
           <span class="input-group-text">from</span>
