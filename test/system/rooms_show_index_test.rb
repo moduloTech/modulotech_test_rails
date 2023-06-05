@@ -10,6 +10,5 @@ class RoomsShowTest < ApplicationSystemTestCase
     assert_text room.name
     assert_text room.location
     assert_text room.price
-
   end
 end

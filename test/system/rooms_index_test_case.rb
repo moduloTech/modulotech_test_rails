@@ -11,7 +11,6 @@ class RoomsIndexTest < ApplicationSystemTestCase
   test "viewing rooms as guest" do
     visit rooms_path
 
-
     @rooms.each do |room|
       assert_text room.name
       assert_text room.location
