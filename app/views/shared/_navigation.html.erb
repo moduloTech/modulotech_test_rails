@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <a class="navbar-brand" href="<%= root_path %>">B👁️👁️king!</a>
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-      <!-- TODO: Implement this search
+      <!-- TODO: Implement this search -->
       <%= form_with url: rooms_path, class: 'd-flex gap-2', role: 'search' do |form| %>
         <div class="input-group">
           <%= form.text_field :location, class: 'form-control', value: params[:location], placeholder: "City" %>
