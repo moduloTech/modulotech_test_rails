@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+
   before_action :authenticate_user!
 
   def index
@@ -6,7 +7,10 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.create booking_params.merge(user: current_user)
-    return redirect_to room_path(booking_params[:room_id].to_i), flash: { error: validation_errors } if @booking.errors.any?
+    if @booking.errors.any?
+      return redirect_to room_path(booking_params[:room_id].to_i),
+                         flash: { error: validation_errors }
+    end
 
     redirect_to rooms_path, flash: { success: t('messages.booking_success') }
   end
@@ -20,4 +24,5 @@ class BookingsController < ApplicationController
   def validation_errors
     @booking.errors.full_messages
   end
+
 end

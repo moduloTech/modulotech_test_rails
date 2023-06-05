@@ -1,5 +1,6 @@
 class Booking < ApplicationRecord
-  scope :booked, -> (from, to) { where(to: from.., from: ..to) }
+
+  scope :booked, ->(from, to) { where(to: from.., from: ..to) }
 
   belongs_to :room
   belongs_to :user
@@ -9,7 +10,7 @@ class Booking < ApplicationRecord
   validate :dates_in_past?, :to_above_from?, :can_book?
 
   def dates_in_past?
-    add_error I18n.t('errors.booking_in_past') if from < Date.today || to < Date.today
+    add_error I18n.t('errors.booking_in_past') if from < Time.current || to < Time.current
   end
 
   def to_above_from?
@@ -22,5 +23,6 @@ class Booking < ApplicationRecord
 
   private
 
-  def add_error(m) = errors.add :base, :invalid, message: m
+  def add_error(msg) = errors.add :base, :invalid, message: msg
+
 end

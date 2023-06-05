@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+
   def index
     @rooms = Room.all
 
@@ -10,6 +11,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find_by!(id: params[:id])
+    @room = Room.find(params[:id])
   end
+
 end
