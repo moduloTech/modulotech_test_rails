@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_112119) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_112620) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,8 +58,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_112119) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "location"
-    t.integer "price"
     t.text "description"
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "USD", null: false
     t.index ["location"], name: "index_rooms_on_location"
     t.index ["name"], name: "index_rooms_on_name"
   end

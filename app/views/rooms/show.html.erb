@@ -26,7 +26,7 @@
     <h5 class="card-title"><%= @room.name %></h5>
     <h6 class="card-subtitle mb-2 text-muted"><%= @room.location %></h6>
     <p class="card-text"><%= @room.description %></p>
-    <h5 class="card-text text-end"><%= @room.price %> per night</h5>
+    <h5 class="card-text text-end"><%= humanized_money_with_symbol @room.price %> per night</h5>
   </div>
   <div class="card-footer bg-primary">
     <%= form_for(Booking.new) do |form| %>

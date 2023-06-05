@@ -4,7 +4,7 @@
     <div class="card-body">
       <h5 class="card-title"><%= room.name %></h5>
       <p class="card-subtitle text-muted"><%= room.location %></p>
-      <h6 class="card-text">$<%= room.price %></h6>
+      <h6 class="card-text"><%= humanized_money_with_symbol room.price %></h6>
       <%= link_to 'View', room_path(room), class: 'btn btn-primary float-end' %>
     </div>
   </div>
