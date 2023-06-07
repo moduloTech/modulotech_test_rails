@@ -16,8 +16,8 @@ services:
     environment:
       RAILS_ENV: development
       URL: http://localhost:3000
-      MODULOTECH-TEST-RAILS_DATABASE_HOST: database
-      MODULOTECH-TEST-RAILS_DATABASE_NAME: modulotech-test-rails
+      MODULOTECH_TEST_RAILS_DATABASE_HOST: database
+      MODULOTECH_TEST_RAILS_DATABASE_NAME: modulotech-test-rails
     entrypoint: ./entrypoints/docker-entrypoint.sh
     stdin_open: true
     tty: true

@@ -14,8 +14,8 @@ services:
     environment:
       RAILS_ENV: production
       URL: http://localhost:3000
-      MODULOTECH-TEST-RAILS_DATABASE_HOST: database
-      MODULOTECH-TEST-RAILS_DATABASE_NAME: modulotech-test-rails
+      MODULOTECH_TEST_RAILS_DATABASE_HOST: database
+      MODULOTECH_TEST_RAILS_DATABASE_NAME: modulotech-test-rails
       RAILS_SERVE_STATIC_FILES: 'true'
 
   database:

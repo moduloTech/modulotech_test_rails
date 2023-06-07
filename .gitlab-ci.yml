@@ -14,7 +14,7 @@ variables:
   POSTGRES_DB: modulotech-test-rails_test
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
-  MODULOTECH-TEST-RAILS_DATABASE_HOST: postgres
+  MODULOTECH_TEST_RAILS_DATABASE_HOST: postgres
 
 stages:
   - test
