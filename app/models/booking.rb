@@ -7,21 +7,21 @@ class Booking < ApplicationRecord
 
   validates :from, :to, presence: true
 
-  validate :dates_in_past?, :to_above_from?, :can_book?
+  validate :dates_in_past, :to_above_from, :can_book
 
-  def dates_in_past?
-    add_error I18n.t('errors.booking_in_past') if from < Time.current || to < Time.current
+  private
+
+  def dates_in_past
+    add_error I18n.t('errors.booking_in_past') if Time.zone.today > to.to_date
   end
 
-  def to_above_from?
+  def to_above_from
     add_error I18n.t('errors.to_must_be_above_from') if to < from
   end
 
-  def can_book?
+  def can_book
     add_error I18n.t('errors.already_booked') unless room.can_book?(from, to)
   end
-
-  private
 
   def add_error(msg) = errors.add :base, :invalid, message: msg
 

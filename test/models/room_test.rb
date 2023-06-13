@@ -2,8 +2,8 @@ require "test_helper"
 
 class RoomTest < ActiveSupport::TestCase
   setup do
-    @room = rooms(:one)
     @user = users(:one)
+    @room = rooms(:one)
 
     base_date = Date.today
     @date_in_past = base_date
