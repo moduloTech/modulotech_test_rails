@@ -1,10 +1,8 @@
-# TODO: Add features to this model to implement the other TODO.
 class Room < ApplicationRecord
 
-  scope :booked, ->(from, to) { where(id: Booking.booked(from, to)).pluck(:room_id).uniq }
-  scope :not_booked, ->(from, to) { where.not(id: Booking.booked(from, to).pluck(:room_id).uniq) }
-
   has_many :bookings, dependent: :destroy
+  belongs_to :user
+  scope :not_booked, ->(from, to) { where.not(id: Booking.booked(from, to).pluck(:room_id)) }
 
   monetize :price_cents
 
@@ -13,7 +11,7 @@ class Room < ApplicationRecord
   end
 
   def can_book?(from, to)
-    !id.in? Booking.booked(from, to).pluck(:room_id)
+    !id.in?(Booking.booked(from, to).pluck(:room_id))
   end
 
 end
