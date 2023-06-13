@@ -1,4 +1,2 @@
-# rubocop:disable all
-class ApplicationService # < Modulorails::BaseService # TODO: remove this comment before release
+class ApplicationService < Modulorails::BaseService
 end
-# rubocop:enable all

@@ -86,6 +86,6 @@ group :test do
 end
 
 # TODO: remove this comment before release
-# gem 'modulorails', '= 1.3.2'
+gem 'modulorails', '= 1.3.2'
 
 gem "devise"
