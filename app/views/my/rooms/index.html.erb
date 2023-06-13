@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>My Rooms</h1>
+  <p><%= link_to 'Add new room', new_my_room_path(@room) %></td></p><br>
+
+  <% @rooms.each do |room| %>
+    <div class="element-container">
+      <p><%= link_to room.name, my_room_url(room) %></p>
+      <div class="room-image-wrapper">
+        <%= image_tag url_for(room.images.first), class: "card-img-top" %>
+      </div>
+      <p><%= "Location: #{room.location}" %></p>
+      <p><%= "Price: #{humanized_money_with_symbol room.price } $/day" %></p>
+    </div>
+    <hr>
+  <% end %>
+</div>

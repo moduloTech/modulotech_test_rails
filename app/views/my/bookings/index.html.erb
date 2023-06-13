@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>My Bookings</h1>
+  <% @bookings.each do |booking| %>
+    <div class="element-container">
+      <p>Name: <%=  link_to booking.room.name, booking.room %></p>
+      <p>Dates: <%= "#{booking.from} - #{booking.to}" %></p>
+      <p><%= link_to 'Destroy', my_booking_path(booking), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></p>
+      <p><%= link_to 'Edit', edit_my_booking_path(booking) %></p>
+    </div>
+    <hr>
+  <% end %>
+</div>

@@ -7,7 +7,9 @@ class RoomsController < ApplicationController
       @rooms = Room.not_booked(params[:from], params[:to])
     end
 
-    @rooms = @rooms.where(location: params[:location]) if params[:location].present?
+    return if params[:location].blank?
+
+    @rooms = @rooms.where('location ILIKE ?', "%#{params[:location]}%")
   end
 
   def show

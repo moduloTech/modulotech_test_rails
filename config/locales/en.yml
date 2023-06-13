@@ -34,6 +34,8 @@ en:
     already_booked: 'This room already booked in those dates'
     booking_in_past: 'You can''t book on dates that pass already'
     to_must_be_above_from: 'To date must be above From date'
+    not_user_booking: 'This booking is not connected to you'
 
   messages:
     booking_success: 'Congrats! You have booked a room!'
+    success: 'Success'

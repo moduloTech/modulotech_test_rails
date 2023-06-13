@@ -1,6 +1,6 @@
-
+<div class="rooms-wrapper">
 <% @rooms.each do |room| %>
-  <div class="card mt-3 col-md-3 ">
+  <div class="card mt-3">
     <%= image_tag url_for(room.images.first), class: "card-img-top" %>
     <div class="card-body">
       <h5 class="card-title"><%= room.name %></h5>
@@ -10,3 +10,4 @@
     </div>
   </div>
 <% end %>
+</div>

@@ -1,0 +1,32 @@
+<%= form_for [:my, @room] do |form| %>
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_field :description, class: 'form-control desc-area' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :images %>
+      <%= form.file_field :images, multiple: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :price_cents %>
+      <%= form.number_field :price_cents, class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :location %>
+      <%= form.text_field :location, class: 'form-control' %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Create', class: 'btn btn-dark' %>
+    </div>
+  </div>
+<% end %>

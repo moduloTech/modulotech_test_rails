@@ -1,0 +1,11 @@
+<%= form_for [:my, booking] do |form| %>
+  <div class="input-group">
+    <span class="input-group-text">from</span>
+    <%= form.date_field :from, class: 'form-control', value: booking.from.to_date %>
+    </span>
+    <span class="input-group-text">to</span>
+    <%= form.date_field :to, class: 'form-control', value: booking.to.to_date %>
+    </span>
+    <%= form.button "Update!", type: "submit", :class => "btn btn-dark" %>
+  </div>
+<% end %>

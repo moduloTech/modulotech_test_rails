@@ -1,0 +1,50 @@
+<h1><%= @room.name %></h1>
+
+<p>
+  <strong>Location:</strong>
+  <%= @room.location %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= humanized_money_with_symbol @room.price %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @room.description %>
+</p>
+
+<% if @room.images.present? %>
+  <div id="carouselImages" class="carousel slide w-50" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <% @room.images.each do |img| %>
+        <div class="carousel-item active">
+          <%= image_tag url_for(img), class: 'd-block w-100 img-fluid rounded-start'  %>
+        </div>
+      <% end %>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+<% else %>
+  <img src="" class="img-fluid rounded-start" alt="...">
+<% end %>
+
+<p><%= link_to 'Destroy', my_room_path(@room), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></p>
+<p><%= link_to 'Edit', edit_my_room_path(@room) %></p>
+<hr>
+
+<strong>Room bookings:</strong>
+<% @bookings.each do |booking| %>
+  <p>
+    <%= "From: #{booking.from} To: #{booking.to} by #{booking.user.email}" %>
+    <%= link_to 'Destroy', booking_path(booking), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  </p>
+<% end %>
