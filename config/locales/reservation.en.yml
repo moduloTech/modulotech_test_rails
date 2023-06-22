@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    attributes:
+      reservation:
+        check_in: "Check In"
+        check_out: "Check Out"
+    errors:
+      check_in:
+        greater_than_check_out: "must be less than check out"
+      user_id:
+        own_room_booking: "user can't book their own room"

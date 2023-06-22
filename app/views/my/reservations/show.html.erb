@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Reservation Details</h1>
+
+  <p><strong>Room:</strong> <%= @reservation.room.name %></p>
+  <p><strong>Check-in:</strong> <%= @reservation.check_in %></p>
+  <p><strong>Check-out:</strong> <%= @reservation.check_out %></p>
+
+  <br>
+
+  <%= link_to 'Edit', edit_my_reservation_path(@reservation), class: 'btn btn-secondary' %>
+  <%= link_to 'Destroy', my_reservation_path(@reservation), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger btn-sm' %>
+  <%= link_to 'Back', my_reservations_path, class: 'btn btn-primary' %>
+</div>

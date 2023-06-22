@@ -16,3 +16,11 @@
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+
+#map {
+  height: 180px;
+}
+
+.img-preview {
+  width: 100px; height: 100px;
+}

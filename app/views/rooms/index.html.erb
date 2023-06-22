@@ -1,3 +1,37 @@
-<h1>Rooms#index</h1>
-<p>Find me in app/views/rooms/index.html.erb</p>
-<!-- TODO: Display rooms available for booking -->
+<h1>Available rooms</h1>
+<div class="row">
+<% @rooms.each do |room| %>
+  <div class="col-sm-3">
+    <div class="card" style="width: 18rem;">
+      <div id="room<%= room.id %>Carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <% room.images.each_with_index do |image, index| %>
+            <div class="carousel-item <%= "active" if index.zero? %>">
+              <%= image_tag url_for(image), class: "d-block w-100" %>
+            </div>
+          <% end %>
+        </div>
+
+        <a class="carousel-control-prev" href="#room<%= room.id %>Carousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#room<%= room.id %>Carousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+      <div class="card-body">
+        <h5 class="card-title"><%= room.name %></h5>
+        <p class="card-subtitle text-muted"><%= room.address %></p>
+        <h6 class="card-text"><%= humanized_money_with_symbol(room.price_per_night) %></h6>
+        <%= link_to 'View', room_path(room), class: 'btn btn-primary float-end' %>
+        <% if params[:check_in].present? && params[:check_out].present? %>
+          <%= button_to 'Make reservation', my_reservations_path(reservation: { room_id: room.id, check_in: params[:check_in], check_out: params[:check_out] }), method: 'post', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
