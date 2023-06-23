@@ -1,3 +1,12 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""></script>
+
+<div id="map" data-controller="map"></div>
+
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="<%= root_path %>">MtBnb</a>
@@ -5,22 +14,20 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-      <!-- TODO: Implement this search -->
-      <form class="d-flex gap-2" role="search">
-        <label class="form-label">
-          Where
-          <input class="form-control me-2" type="search" placeholder="Search destinations" aria-label="Search destinations">
-        </label>
-        <label class="form-label">
-          Check in
-          <input class="form-control me-2" type="date" aria-label="Check in">
-        </label>
-        <label class="form-label">
-          Check out
-          <input class="form-control me-2" type="date" aria-label="Check out">
-        </label>
-        <button class="btn btn-primary" type="submit">Search</button>
-      </form>
+      <%= form_with url: rooms_path, method: :get, class: 'd-flex gap-2', role: 'search' do |form| %>
+        <div class="input-group">
+          <span class="input-group-text">Choose a point on a map above</span>
+          <%= form.hidden_field :latitude, class: 'form-control' %>
+          <%= form.hidden_field :longitude, class: 'form-control' %>
+          <span class="input-group-text">Search Radius (km)</span>
+          <%= form.number_field :radius, :class => 'form-control', value: params[:radius] || 50 %>
+          <span class="input-group-text">from</span>
+          <%= form.date_field :check_in, :class => 'form-control', value: params[:check_in] %>
+          <span class="input-group-text">to</span>
+          <%= form.date_field :check_out, :class => 'form-control', value: params[:check_out] %>
+          <%= submit_tag("Search") %>
+        </div>
+      <% end %>
 
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
@@ -31,13 +38,9 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
-                <!-- TODO: Implement route '/my/rooms' to display the rooms owned by the user -->
-                <!-- TODO: '/my/rooms' must allow the user to fully manage its rooms -->
                 <%= link_to 'My rooms', '/my/rooms', class: 'dropdown-item' %>
               </li>
               <li>
-                <!-- TODO: Implement route '/my/reservations' to display the reservations made by the user -->
-                <!-- TODO: '/my/rooms' must allow the user to fully manage its reservations -->
                 <%= link_to 'My reservations', '/my/reservations', class: 'dropdown-item' %>
               </li>
               <li class="border-top">

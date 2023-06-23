@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Edit Reservation</h1>
+
+  <%= render 'form' %>
+
+  <%= link_to 'Show', my_reservation_path(@reservation), class: 'btn btn-secondary' %> |
+  <%= link_to 'Destroy', my_reservation_path(@reservation), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger btn-sm' %>
+  <%= link_to 'Back', my_reservations_path, class: 'btn btn-primary' %>
+</div>

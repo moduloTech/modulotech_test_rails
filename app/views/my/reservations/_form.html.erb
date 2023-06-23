@@ -1,0 +1,17 @@
+<%= form_with(model: @reservation, url: @reservation.persisted? ? my_reservation_path(@reservation) : my_reservations_path, local: true, class: 'container') do |form| %>
+  <%= render partial: 'shared/error', locals: { object: @reservation } %>
+
+  <div class="form-group">
+    <%= form.label :check_in %>
+    <%= form.date_field :check_in, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :check_out %>
+    <%= form.date_field :check_out, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+  </div>
+<% end %>
