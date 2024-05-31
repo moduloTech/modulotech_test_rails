@@ -22,3 +22,4 @@ COPY . .
 EXPOSE 3000
 
 ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]
+CMD [ "bin/bundle", "exec", "rails", "s" ]

@@ -18,12 +18,11 @@ services:
       URL: http://localhost:3000
       MODULOTECH_TEST_RAILS_DATABASE_HOST: database
       MODULOTECH_TEST_RAILS_DATABASE_NAME: modulotech-test-rails
-    entrypoint: ./entrypoints/docker-entrypoint.sh
     stdin_open: true
     tty: true
 
   database:
-    image: postgres:13.5
+    image: postgres:latest
     volumes:
       - db_data:/var/lib/postgresql/data
     environment:
@@ -34,13 +33,13 @@ services:
       LC_CTYPE: 'en_US.UTF-8'
 
   redis:
-    image: redis:6.2-alpine
+    image: redis:alpine
 
   mailcatcher:
-    image: tophfr/mailcatcher
+    image: dockage/mailcatcher
     ports:
-      - 1080:80
-
+      - '1080:1080'
+      - '1025:1025'
 
 volumes:
   db_data:

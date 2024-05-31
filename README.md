@@ -52,4 +52,3 @@ to [get started](https://docs.docker.com/get-started/).*
 - If your UI/UX is good, you win points.
 
 Your goal is to win the maximum of points and to impress me!
-

@@ -6,8 +6,8 @@ include:
       - '/templates/docker-buildx.gitlab-ci.yml'
 
 services:
-  - postgres:13.5
-  - redis:6.2
+  - postgres
+  - redis:alpine
 
 variables:
   IMAGE_NAME: modulotech-test-rails
@@ -51,8 +51,10 @@ deploy_production:
     STAGE: production
   only:
     - master
+
 rubocop:
   extends: .lint
+
 # Scan Gemfile.lock for Common Vulnerabilities and Exposures
 # https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures
 # https://www.cve.org/

@@ -16,5 +16,4 @@ then
   rm tmp/pids/server.pid
 fi
 
-# Launch the application listening from all origins on port 3000
-./bin/bundle exec rails s -b 0.0.0.0 -p 3000
+exec "${@}"
