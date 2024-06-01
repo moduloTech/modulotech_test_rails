@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   root "rooms#index"
 
   resources :rooms, only: %i[index show]
+  namespace :my do
+    resources :rooms, only: %i[index edit new create update destroy]
+  end
 end

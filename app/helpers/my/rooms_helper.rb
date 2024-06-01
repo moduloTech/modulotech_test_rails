@@ -1,0 +1,2 @@
+module My::RoomsHelper
+end
