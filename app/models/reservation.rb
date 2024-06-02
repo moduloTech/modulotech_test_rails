@@ -9,11 +9,11 @@ class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :room
 
-  before_validation :set_default_status, on: :create
-  before_validation :calculate_total_price
-
   validates :start_date, :end_date, presence: true
-  validate :dates_in_past, :end_above_start_date, :can_reserved, on: :create
+
+  before_validation :set_default_status, on: :create
+  before_validation :calculate_total_price, if: :dates_and_room_present?
+  validate :dates_in_past, :end_above_start_date, :can_reserved, if: :dates_and_room_present?, on: :create
 
   scope :reserved, lambda { |start_date, end_date|
                      where(start_date: ..end_date, end_date: start_date..)
@@ -21,7 +21,7 @@ class Reservation < ApplicationRecord
                    }
 
   scope :reserved_dates_room, lambda { |room_id|
-    where(room_id:).order(start_date: :asc).pluck(:start_date, :end_date)
+    where(room_id:).where.not(status: STATUS[:canceled]).order(start_date: :asc).pluck(:start_date, :end_date)
   }
 
   def cancel!
@@ -40,12 +40,16 @@ class Reservation < ApplicationRecord
     self.status = STATUS[:confirmed]
   end
 
+  def dates_and_room_present?
+    start_date.present? && end_date.present? && room.present?
+  end
+
   def calculate_total_price
     self.price_cents = (end_date - start_date + 1).to_i * room.price_per_night_cents
   end
 
   def dates_in_past
-    errors.add(:base, I18n.t('errors.my.reservation_in_past')) if Time.zone.today > end_date.to_date
+    errors.add(:base, I18n.t('errors.my.reservation_in_past')) if Time.zone.today > start_date.to_date
   end
 
   def end_above_start_date

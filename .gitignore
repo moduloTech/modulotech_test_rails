@@ -35,3 +35,5 @@
 
 # Ignore .env
 .env
+
+coverage/**/*

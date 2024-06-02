@@ -59,6 +59,9 @@ group :development, :test do
   # ENV 
   gem "dotenv-rails"
 
+  # Code coverage
+  gem 'simplecov', require: false
+
   # rubocop
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
