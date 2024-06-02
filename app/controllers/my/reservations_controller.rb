@@ -10,18 +10,18 @@ class My::ReservationsController < ApplicationController
   def create
     @reservation = current_user.reservations.new(reservation_params)
     @room = @reservation.room
+    @reservations = Reservation.reserved_dates_room(@room.id)
+
     if @reservation.save
       redirect_to my_reservations_path, notice: I18n.t('messages.success')
     else
-      @reservations = Reservation.reserved_dates_room(params[:room_id])
-
       respond_to do |format|
         format.html { render 'rooms/show', status: :unprocessable_entity }
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
-            'reservation_form',
+            "reservation_form",
             partial: 'my/reservations/reservation_form',
-            locals:  { room: @room, reservation: @reservation, reservations: @reservations }
+            locals: { room: @room, reservation: @reservation, reservations: @reservations }
           )
         end
       end

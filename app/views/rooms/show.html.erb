@@ -43,10 +43,13 @@
           </div>
 
           <div class="card mb-3">
-            <% if user_signed_in? && @room.user != current_user %>
+          <% if user_signed_in? && @room.user != current_user %>
+            <%= turbo_frame_tag "reservation_form" do %>
               <%= render partial: "my/reservations/reservation_form", locals: { reservation: @reservation, room: @room, reservations: @reservations } %>
             <% end %>
-          </div>
+          <% end %>
+        </div>
+
         </div>
       </div>
 
