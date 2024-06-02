@@ -1,0 +1,12 @@
+<div class="col-md-4 col-6" id="<%= dom_id room %>">
+  <div class="card">
+    <%= image_tag room.image.variant(resize: "300x300"), class: "card-img-top" if room.image.attached? %>
+    <div class="card-body">
+      <h2 class="card-title"><%= room.name %></h2>
+      <p class="card-text">Location: <%= room.location %></p>
+      <p class="card-text">Capacity: <%= room.capacity %></p>
+      <p class="card-text">Price per Night: <%= humanized_money_with_symbol(room.price_per_night_cents) %></p>
+      <%= link_to "View room", room_path(room), class: "btn btn-primary", data: { turbo_frame: "room_#{room.id}" } %>
+    </div>
+  </div>
+</div>
