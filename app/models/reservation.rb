@@ -9,11 +9,13 @@ class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :room
 
-  validates :start_date, :end_date, presence: true
+
+  validates :start_date, comparison: { greater_than_or_equal_to: -> { Time.zone.today } }
+  validates :end_date, comparison: { greater_than_or_equal_to: ->(reservation) { reservation.start_date } }
 
   before_validation :set_default_status, on: :create
+  validate :can_reserved, if: :dates_and_room_present?, on: :create
   before_validation :calculate_total_price, if: :dates_and_room_present?
-  validate :dates_in_past, :end_above_start_date, :can_reserved, if: :dates_and_room_present?, on: :create
 
   scope :reserved, lambda { |start_date, end_date|
                      where(start_date: ..end_date, end_date: start_date..)
@@ -46,14 +48,6 @@ class Reservation < ApplicationRecord
 
   def calculate_total_price
     self.price_cents = (end_date - start_date + 1).to_i * room.price_per_night_cents
-  end
-
-  def dates_in_past
-    errors.add(:base, I18n.t('errors.my.reservation_in_past')) if Time.zone.today > start_date.to_date
-  end
-
-  def end_above_start_date
-    errors.add(:base, I18n.t('errors.my.reservation.end_date_before_start_date')) if end_date < start_date
   end
 
   def can_reserved
