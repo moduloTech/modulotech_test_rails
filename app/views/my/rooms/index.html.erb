@@ -25,7 +25,7 @@
           </div>
           <div class="text-right">
             <%= link_to "Edit", edit_my_room_path(room), class: "btn btn-secondary mr-2" %>
-            <%= button_to my_room_path(room), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure?" } do %>
+            <%= button_to my_room_path(room), class: "btn btn-danger", method: :delete do %>
               Delete
             <% end %>
           </div>

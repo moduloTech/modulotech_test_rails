@@ -1,46 +1,56 @@
-<!-- TODO: Allow to reserve the room for various periods of time -->
 <div class="container">
   <h1 class="display-4 text-center mb-5">Room Details</h1>
 
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div id="carouselExampleIndicators" class="carousel slide mb-3" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <% if @room.image.attached? %>
-            <div class="carousel-item active">
-              <img src="<%= url_for(@room.image.variant(resize: "800x600")) %>" class="d-block w-100" alt="<%= @room.name %>">
+      <div class="row">
+        <div class="col-md-6">
+          <div id="carouselExampleIndicators" class="carousel slide mb-3" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% if @room.image.attached? %>
+                <div class="carousel-item active">
+                  <img src="<%= url_for(@room.image.variant(resize: "800x600")) %>" class="d-block w-100" alt="<%= @room.name %>">
+                </div>
+              <% end %>
+              <% if @room.gallery_images.attached? %>
+                <% @room.gallery_images.each_with_index do |image, index| %>
+                  <div class="carousel-item <%= 'active' if index == 0 %>">
+                    <%= image_tag image.variant(resize: "800x600"), class: "d-block w-100" %>
+                  </div>
+                <% end %>
+              <% end %>
             </div>
-          <% end %>
-          <% if @room.gallery_images.attached? %>
-            <% @room.gallery_images.each_with_index do |image, index| %>
-              <div class="carousel-item <%= 'active' if index == 0 %>">
-                <%= image_tag image.variant(resize: "800x600"), class: "d-block w-100" %>
-              </div>
+            <% if @room.gallery_images.attached? && @room.gallery_images.length > 1 %>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             <% end %>
-          <% end %>
+          </div>
         </div>
-        <% if @room.gallery_images.attached? && @room.gallery_images.length > 1 %>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        <% end %>
-      </div>
+        <div class="col-md-6">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= @room.name %></h5>
+              <p class="card-text">Location: <%= @room.location %></p>
+              <p class="card-text">Price per night: <%= humanized_money_with_symbol(@room.price_per_night_cents) %></p>
+              <p class="card-text"><%= @room.description %></p>
+            </div>
+          </div>
 
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title"><%= @room.name %></h5>
-          <p class="card-text">Location: <%= @room.location %></p>
-          <p class="card-text">Price per night: <%= humanized_money_with_symbol(@room.price_per_night_cents) %></p>
-          <p class="card-text"><%= @room.description %></p>
+          <div class="card mb-3">
+            <% if user_signed_in? && @room.user != current_user %>
+              <%= render partial: "my/reservations/reservation_form", locals: { reservation: @reservation, room: @room, reservations: @reservations } %>
+            <% end %>
+          </div>
         </div>
       </div>
 
-      <div class="text-center">
+      <div class="text-center mt-3">
         <a href="<%= rooms_path %>" class="btn btn-primary">Back to Rooms List</a>
       </div>
     </div>

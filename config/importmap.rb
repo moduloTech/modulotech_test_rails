@@ -9,3 +9,4 @@ pin "popper", to: 'popper.js', preload: true
 pin "bootstrap", to: 'bootstrap.min.js', preload: true
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js"
+pin "flatpickr" # @4.6.13

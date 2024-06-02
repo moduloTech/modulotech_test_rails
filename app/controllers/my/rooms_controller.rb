@@ -16,7 +16,7 @@ class My::RoomsController < ApplicationController
 
   def create
     @room = current_user.rooms.new(rooms_params)
-    return redirect_to(my_rooms_path, notice: t('messages.success')) if @room.save
+    return redirect_to(my_rooms_path, notice: I18n.t('messages.success')) if @room.save
 
     redirect_to(new_my_room_path, alert: @room.errors)
   end
@@ -30,7 +30,7 @@ class My::RoomsController < ApplicationController
   def destroy
     @room.destroy
 
-    redirect_to my_rooms_path, notice: t('messages.success')
+    redirect_to my_rooms_path, notice: I18n.t('messages.success')
   end
 
   private

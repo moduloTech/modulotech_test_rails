@@ -5,22 +5,24 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-      <!-- TODO: Implement this search -->
-      <form class="d-flex gap-2" role="search">
-        <label class="form-label">
-          Where
-          <input class="form-control me-2" type="search" placeholder="Search destinations" aria-label="Search destinations">
-        </label>
-        <label class="form-label">
-          Check in
-          <input class="form-control me-2" type="date" aria-label="Check in">
-        </label>
-        <label class="form-label">
-          Check out
-          <input class="form-control me-2" type="date" aria-label="Check out">
-        </label>
-        <button class="btn btn-primary" type="submit">Search</button>
-      </form>
+      <%= form_with(url: rooms_path, method: "get", class: "d-flex gap-2", role: "search") do |form| %>
+        <div class="form-label">
+          <%= form.label :location, "Where" %>
+          <%= form.text_field :location, class: "form-control me-2", placeholder: "Search destinations", aria: { label: "Search destinations" } %>
+        </div>
+
+        <div class="form-label">
+          <%= form.label :start_date, "Start Date" %>
+          <%= form.date_field :start_date, class: "form-control me-2", aria: { label: "Start Date" } %>
+        </div>
+
+        <div class="form-label">
+          <%= form.label :end_date, "End Date" %>
+          <%= form.date_field :end_date, class: "form-control me-2", aria: { label: "End Date" } %>
+        </div>
+
+        <%= form.submit "Search", class: "btn btn-primary" %>
+      <% end %>
 
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
@@ -34,9 +36,7 @@
                 <%= link_to 'My rooms', my_rooms_path, class: 'dropdown-item' %>
               </li>
               <li>
-                <!-- TODO: Implement route '/my/reservations' to display the reservations made by the user -->
-                <!-- TODO: '/my/rooms' must allow the user to fully manage its reservations -->
-                <%= link_to 'My reservations', '/my/reservations', class: 'dropdown-item' %>
+                <%= link_to 'My reservations', my_reservations_path, class: 'dropdown-item' %>
               </li>
               <li class="border-top">
                 <%= button_to destroy_user_session_path, class: 'dropdown-item', method: :delete do %>

@@ -1,0 +1,29 @@
+<%= turbo_frame_tag "reservation_form" do %>
+  <%= form_with(model: reservation, url: my_reservations_path, local: true,
+    data: { controller: "flatpickr", turbo: false, reservations: reservations }) do |form| %>
+    <h2>Book this room</h2>
+    <% if reservation.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(reservation.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+        <ul>
+          <% reservation.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= form.label :start_date, class: "form-label" %>
+      <%= form.datetime_field :start_date, class: "form-control start_date", data: { flatpickr_target: "startDate" } %>
+    </div>
+    <div class="form-group">
+      <%= form.label :end_date, class: "form-label" %>
+      <%= form.datetime_field :end_date, class: "form-control end_date", data: { flatpickr_target: "endDate" } %>
+    </div>
+    <%= form.hidden_field :room_id, value: room.id %>
+    <div class="form-group">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>

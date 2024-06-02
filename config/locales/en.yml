@@ -1,4 +1,10 @@
-
 en:
   messages:
     success: 'Success'
+
+  errors:
+    my:
+      reservation:
+        reservation_in_past: 'Reservation cannot be in the past'
+        end_date_before_start_date: 'End date cannot be before start date'
+        room_reserved: 'Room is already reserved'
