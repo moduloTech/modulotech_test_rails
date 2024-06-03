@@ -16,4 +16,9 @@ then
   rm tmp/pids/server.pid
 fi
 
+if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+  echo "Running database migrations..."
+  ./bin/rails db:prepare
+fi
+
 exec "${@}"
