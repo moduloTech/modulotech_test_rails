@@ -19,9 +19,9 @@ class My::ReservationsController < ApplicationController
         format.html { render 'rooms/show', status: :unprocessable_entity }
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
-            "reservation_form",
+            'reservation_form',
             partial: 'my/reservations/reservation_form',
-            locals: { room: @room, reservation: @reservation, reservations: @reservations }
+            locals:  { room: @room, reservation: @reservation, reservations: @reservations }
           )
         end
       end

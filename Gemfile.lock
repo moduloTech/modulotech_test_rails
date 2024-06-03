@@ -216,6 +216,7 @@ GEM
     nokogiri (1.16.5-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (6.5.0)
     parallel (1.24.0)
     parser (3.3.2.0)
       ast (~> 2.4.1)
@@ -418,6 +419,7 @@ DEPENDENCIES
   jbuilder
   modulorails (= 1.4.0.1)
   money-rails
+  pagy (~> 6.2)
   pg (~> 1.1)
   pry-rails
   puma (~> 6.0)

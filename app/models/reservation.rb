@@ -9,7 +9,6 @@ class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :room
 
-
   validates :start_date, comparison: { greater_than_or_equal_to: -> { Time.zone.today } }
   validates :end_date, comparison: { greater_than_or_equal_to: ->(reservation) { reservation.start_date } }
 

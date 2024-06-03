@@ -18,8 +18,8 @@ room_barcelona = Room.find_or_create_by!(name: 'las playas de espana', location:
   room.description = "Esta habitación es cómoda y espaciosa, perfecta para una estancia agradable en Barcelona"
 end
 
-[1, 2, 3].each do |i|
-  Room.find_or_create_by!(name: "sofia #{i}", location: 'sofia', capacity: 5,
+(1...30).each do |i|
+  Room.find_or_create_by!(name: "sofia #{i}", location: 'sofia', capacity: i,
                           price_per_night_cents: Money.new(100_00, 'EUR'), user: user_sofia) do |room|
     room.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'sofia_image.jpg')), filename: 'sofia_image.jpg')
     room.gallery_images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'sofia_gallery.jpg')), filename: 'sofia_gallery.jpg')

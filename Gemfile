@@ -98,3 +98,5 @@ gem 'modulorails', '= 1.4.0.1'
 gem "devise"
 
 gem 'money-rails'
+
+gem 'pagy', '~> 6.2'
