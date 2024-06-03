@@ -6,7 +6,7 @@
       <p class="card-text">Location: <%= room.location %></p>
       <p class="card-text">Capacity: <%= room.capacity %></p>
       <p class="card-text">Price per Night: <%= humanized_money_with_symbol(room.price_per_night_cents) %></p>
-      <%= link_to "View room", room_path(room), class: "btn btn-primary", data: { turbo_frame: "_top" } %>
+      <%= link_to "View room", room_path(room), class: "btn btn-primary turn-link", data: { turn_target: "show" } %>
     </div>
   </div>
 </div>

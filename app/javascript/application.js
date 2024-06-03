@@ -12,3 +12,8 @@ popoverTriggerList.map(function (popoverTriggerEl) {
 
 import "trix"
 import "@rails/actiontext"
+
+import Turn from "@domchristie/turn"
+
+// Page transitions
+Turn.start()

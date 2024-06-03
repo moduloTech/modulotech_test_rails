@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container turn-view" id="show">
   <h1 class="display-4 text-center mb-5">Room Details</h1>
 
   <div class="row justify-content-center">
@@ -44,7 +44,7 @@
 
           <div class="card mb-3">
           <% if user_signed_in? && @room.user != current_user %>
-            <%= turbo_frame_tag "reservation_form" do %>
+            <%= turbo_frame_tag "reservation_form", target: "_top" do %>
               <%= render partial: "my/reservations/reservation_form", locals: { reservation: @reservation, room: @room, reservations: @reservations } %>
             <% end %>
           <% end %>
