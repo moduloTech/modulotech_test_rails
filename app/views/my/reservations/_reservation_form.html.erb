@@ -1,8 +1,7 @@
 <%= form_with(model: reservation, url: my_reservations_path, data: { controller: "flatpickr", reservations: reservations }) do |form| %>
   <h2>Book this room</h2>
   <% if reservation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(reservation.errors.count, "error") %> prohibited this room from being saved:</h2>
+    <div class="alert alert-danger" role="alert">
       <ul>
         <% reservation.errors.full_messages.each do |message| %>
           <li><%= message %></li>

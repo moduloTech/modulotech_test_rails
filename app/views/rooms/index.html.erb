@@ -2,7 +2,7 @@
 
 <div class="container my-4">
   <%= turbo_frame_tag "rooms", target: "_top" do %>
-    <div id="rooms" class="row g-4">
+    <div class="row">
       <%= render partial: "rooms/room", collection: @rooms, as: :room, cache: true %>
     </div>
 
