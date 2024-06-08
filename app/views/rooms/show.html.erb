@@ -21,10 +21,6 @@
               <%= turbo_frame_tag "reservation_form", target: "_top" do %>
                 <%= render partial: "my/reservations/reservation_form", locals: { reservation: @reservation, room: @room, reservations: @reservations } %>
               <% end %>
-            <% else %>
-              <div class="card-body">
-                <p class="card-text">Please sign in to make a reservation.</p>
-              </div>
             <% end %>
           </div>
         </div>

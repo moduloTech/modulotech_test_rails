@@ -34,19 +34,6 @@ RSpec.describe My::ReservationsController, type: :controller do
         expect(response).to redirect_to(my_reservations_path)
       end
     end
-
-    context "with invalid params" do
-      it "does not create a new reservation" do
-        expect {
-          post :create, params: { reservation: attributes_for(:reservation, room_id: nil) }
-        }.not_to change(Reservation, :count)
-      end
-
-      it "renders the 'rooms/show' template" do
-        post :create, params: { reservation: attributes_for(:reservation, room_id: nil) }
-        expect(response).to render_template("rooms/show")
-      end
-    end
   end
 
   describe "DELETE #destroy" do

@@ -1,15 +1,5 @@
 <%= form_with(model: [:my, room], local: true) do |form| %>
-  <% if room.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
-
-      <ul>
-        <% room.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'shared/error_messages', locals: { object: room } %>
 
   <div class="form-group">
     <%= form.label :name %>
@@ -42,8 +32,15 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :gallery_images %>
-    <%= form.file_field :gallery_images, multiple: true, class: "form-control-file", multiple: true %>
+    <%= form.label :gallery_images, multiple: true %>
+    <%= form.file_field :gallery_images, multiple: true, class: "form-control-file" %>
+    <% if room.gallery_images.attached? %>
+      <% room.gallery_images.each do |gallery_image| %>
+        <%= form.hidden_field :gallery_images, multiple: true, value: gallery_image.signed_id %>
+        <%= image_tag(gallery_image, height: '100') %>
+        <%= link_to "Remove", remove_image_my_room_path(gallery_image), data: { turbo_method: :delete } %>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="text-center">

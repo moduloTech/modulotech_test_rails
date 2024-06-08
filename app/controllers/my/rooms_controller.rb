@@ -33,6 +33,12 @@ class My::RoomsController < ApplicationController
     redirect_to my_rooms_path, notice: I18n.t('messages.success')
   end
 
+  def remove_image
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge_later
+    redirect_back(fallback_location: request.referer)
+  end
+
   private
 
   def set_room

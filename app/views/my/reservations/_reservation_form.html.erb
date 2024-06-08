@@ -1,14 +1,6 @@
 <%= form_with(model: reservation, url: my_reservations_path, data: { controller: "flatpickr", reservations: reservations }) do |form| %>
   <h2>Book this room</h2>
-  <% if reservation.errors.any? %>
-    <div class="alert alert-danger" role="alert">
-      <ul>
-        <% reservation.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'shared/error_messages', locals: { object: reservation } %>
   <div class="form-group">
     <%= form.label :start_date, class: "form-label" %>
     <%= form.datetime_field :start_date, class: "form-control start_date", data: { flatpickr_target: "startDate" } %>

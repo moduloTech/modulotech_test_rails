@@ -6,7 +6,12 @@ Rails.application.routes.draw do
 
   resources :rooms, only: %i[index show]
   namespace :my do
-    resources :rooms, only: %i[index edit new create update destroy]
+    resources :rooms, only: %i[index edit new create update destroy] do
+      member do
+        delete :remove_image
+      end
+    end
+
     resources :reservations, only: %i[index create destroy]
   end
 end
