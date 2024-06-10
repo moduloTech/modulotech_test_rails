@@ -9,11 +9,6 @@ class RoomsController < ApplicationController
     @rooms = @rooms.by_location(params[:location]) if params[:location].present?
 
     @pagy, @rooms = pagy(@rooms)
-
-    respond_to do |format|
-      format.html
-      format.turbo_stream
-    end
   end
 
   def show
