@@ -20,7 +20,7 @@ class My::ReservationsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
             'reservation_form',
-            partial: 'my/reservations/reservation_form',
+            partial: 'my/reservations/form',
             locals:  { room: @room, reservation: @reservation, reservations: @reservations }
           )
         end

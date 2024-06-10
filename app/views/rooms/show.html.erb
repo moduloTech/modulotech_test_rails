@@ -1,33 +1,35 @@
 <div class="container turn-view" id="show">
-  <h1 class="display-4 text-center mb-5">Room Details</h1>
+  <%= turbo_frame_tag "room_details", target: "_top" do %>
+    <h1 class="display-4 text-center mb-5">Room Details</h1>
 
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-md-6">
-          <%= render partial: 'carousel', locals: { room: @room } %>
-        </div>
-        <div class="col-md-6">
-          <div class="card mb-3">
-            <div class="card-body">
-              <h5 class="card-title"><%= @room.name %></h5>
-              <p class="card-text">Location: <%= @room.location %></p>
-              <p class="card-text">Price per night: <%= humanized_money_with_symbol(@room.price_per_night_cents) %></p>
-              <p class="card-text"><%= @room.description %></p>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-6">
+            <%= render partial: 'carousel', locals: { room: @room } %>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title"><%= @room.name %></h5>
+                <p class="card-text">Location: <%= @room.location %></p>
+                <p class="card-text">Price per night: <%= humanized_money_with_symbol(@room.price_per_night_cents) %></p>
+                <p class="card-text"><%= @room.description %></p>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <% if user_signed_in? && @room.user != current_user %>
+                <%= turbo_frame_tag "reservation_form", target: "_top" do %>
+                  <%= render partial: "my/reservations/form", locals: { reservation: @reservation, room: @room, reservations: @reservations } %>
+                <% end %>
+              <% end %>
             </div>
           </div>
-          <div class="card mb-3">
-            <% if user_signed_in? && @room.user != current_user %>
-              <%= turbo_frame_tag "reservation_form", target: "_top" do %>
-                <%= render partial: "my/reservations/reservation_form", locals: { reservation: @reservation, room: @room, reservations: @reservations } %>
-              <% end %>
-            <% end %>
-          </div>
+        </div>
+        <div class="text-center mt-3">
+          <a href="<%= root_path %>" class="btn btn-primary">Back to Rooms List</a>
         </div>
       </div>
-      <div class="text-center mt-3">
-        <a href="<%= rooms_path %>" class="btn btn-primary">Back to Rooms List</a>
-      </div>
     </div>
-  </div>
+  <% end %>
 </div>

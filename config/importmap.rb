@@ -10,4 +10,3 @@ pin "bootstrap", to: 'bootstrap.min.js', preload: true
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js"
 pin "flatpickr" # @4.6.13
-pin "@domchristie/turn", to: "@domchristie--turn.js" # @3.1.1

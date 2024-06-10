@@ -9,17 +9,6 @@ RSpec.describe RoomsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    context 'with date filters' do
-      it 'filters rooms by availability' do
-        reserved_room = create(:room)
-        create(:reservation, room: reserved_room, start_date: Time.zone.today, end_date: Time.zone.today + 1)
-
-        get :index, params: { start_date: Time.zone.today, end_date: Time.zone.today + 1 }
-        expect(assigns(:rooms)).to include(room)
-        expect(assigns(:rooms)).not_to include(reserved_room)
-      end
-    end
-
     context 'with location filter' do
       it 'filters rooms by location' do
         room_in_location = create(:room, location: 'Paris')

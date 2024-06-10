@@ -1,5 +1,5 @@
 <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4" id="<%= dom_id room %>">
-  <div class="card" onclick="window.location='<%= room_path(room) %>'" style="cursor: pointer;">
+    <div class="card" onclick="Turbo.visit('<%= room_path(room) %>', { action: 'replace', frame: 'room_details' })">
     <div id="carousel<%= dom_id room %>" class="carousel slide">
       <%= render partial: 'carousel', locals: { room: room } %>
       <button class="carousel-control-prev" type="button" data-bs-target="#carousel<%= dom_id room %>" data-bs-slide="prev" onclick="event.stopPropagation();">
