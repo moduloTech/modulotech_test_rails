@@ -16,15 +16,15 @@ class My::RoomsController < ApplicationController
 
   def create
     @room = current_user.rooms.new(rooms_params)
-    return redirect_to(my_rooms_path, notice: I18n.t('messages.success')) if @room.save
+    return render(:new, status: :unprocessable_entity) unless @room.save
 
-    redirect_to(new_my_room_path, alert: @room.errors)
+    redirect_to(my_rooms_path, notice: I18n.t('messages.success'))
   end
 
   def update
-    return redirect_to my_rooms_path if @room.update(rooms_params)
+    return render(:edit, status: :unprocessable_entity) unless @room.update(rooms_params)
 
-    redirect_to edit_my_room_path, alert: @room.errors
+    redirect_to(my_rooms_path, notice: I18n.t('messages.success'))
   end
 
   def destroy

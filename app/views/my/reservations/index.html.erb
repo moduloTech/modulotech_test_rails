@@ -1,29 +1,14 @@
 <div class="container">
   <h1 class="display-4 text-center mb-5">My Reservations</h1>
 
-  <% if @reservations.any? %>
-    <div class="list-group">
-      <% @reservations.each do |reservation| %>
-        <div class="list-group-item list-group-item-action">
-          <div class="d-flex w-100 justify-content-between">
-            <div>
-              <h5 class="mb-1">Room: <%= reservation.room.name %></h5>
-              <p class="mb-1">Location: <%= reservation.room.location %></p>
-              <p class="mb-1">Start Date: <%= reservation.start_date %></p>
-              <p class="mb-1">End Date: <%= reservation.end_date %></p>
-              <p class="mb-1">Total Price: <%= humanized_money_with_symbol(reservation.price_cents) %></p>
-              <p class="mb-1">Status: <%= reservation.status.capitalize %></p>
-              <% if reservation.confirmed? %>
-                <%= button_to my_reservation_path(reservation), class: "btn btn-danger", method: :delete do %>
-                  Delete
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  <% else %>
-    <p class="text-center">You have no reservations.</p>
+  <div class="d-flex justify-content-center">
+    <%= link_to 'Confirmed', my_reservations_path(status: 'confirmed'), method: :get, class: 'btn btn-primary', data: { turbo_frame: "reservations", turbo_action: "advance" } %>
+    <%= link_to 'Pending', my_reservations_path(status: 'pending'), method: :get, class: 'btn btn-warning', data: { turbo_frame: "reservations", turbo_action: "advance" } %>
+    <%= link_to 'Canceled', my_reservations_path(status: 'canceled'), method: :get, class: 'btn btn-danger', data: { turbo_frame: "reservations", turbo_action: "advance" } %>
+  </div>
+
+
+  <%= turbo_frame_tag "reservations" do %>
+    <%= render @reservations %>
   <% end %>
 </div>

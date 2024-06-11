@@ -4,7 +4,11 @@ class My::ReservationsController < ApplicationController
   before_action :set_reservation, only: %i[destroy]
 
   def index
+    @status = params[:status]
+    @status = Reservation::STATUS[:confirmed] unless Reservation::STATUS.values.include?(@status)
+
     @reservations = current_user.reservations
+    @reservations = @reservations.where(status: @status) if @status.present?
   end
 
   def create
@@ -15,16 +19,11 @@ class My::ReservationsController < ApplicationController
     if @reservation.save
       redirect_to my_reservations_path, notice: I18n.t('messages.success')
     else
-      respond_to do |format|
-        format.html { render 'rooms/show', status: :unprocessable_entity }
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            'reservation_form',
-            partial: 'my/reservations/form',
-            locals:  { room: @room, reservation: @reservation, reservations: @reservations }
-          )
-        end
-      end
+      render turbo_stream: turbo_stream.replace(
+        'reservation_form',
+        partial: 'my/reservations/form',
+        locals:  { room: @room, reservation: @reservation, reservations: @reservations }
+      )
     end
   end
 
