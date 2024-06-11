@@ -8,7 +8,8 @@ class My::ReservationsController < ApplicationController
     @status = Reservation::STATUS[:confirmed] unless Reservation::STATUS.values.include?(@status)
 
     @reservations = current_user.reservations
-    @reservations = @reservations.by_status(@status) if @status.present?
+
+    @reservations = @reservations.unscoped.by_status(@status)
   end
 
   def create
