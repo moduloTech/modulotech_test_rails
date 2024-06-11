@@ -53,6 +53,12 @@ to [get started](https://docs.docker.com/get-started/).*
 
 Your goal is to win the maximum of points and to impress me!
 
+Practical commands:
+```
+rubocop -A # install the gem or extension
+
+bundle exec rspec
+```
 
 Dependencies local: https://github.com/janko/image_processing
 ```

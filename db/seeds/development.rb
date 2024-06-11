@@ -29,3 +29,5 @@ end
 
 # Reservations
 Reservation.find_or_create_by!(start_date: Date.today + 1, end_date: Date.today + 3, room: room_barcelona, user: user_paris)
+r2 = Reservation.find_or_create_by!(start_date: Date.today + 4, end_date: Date.today + 6, room: room_barcelona, user: user_paris)
+r2.confirm!

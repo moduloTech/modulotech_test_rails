@@ -8,7 +8,7 @@ class My::ReservationsController < ApplicationController
     @status = Reservation::STATUS[:confirmed] unless Reservation::STATUS.values.include?(@status)
 
     @reservations = current_user.reservations
-    @reservations = @reservations.where(status: @status) if @status.present?
+    @reservations = @reservations.by_status(@status) if @status.present?
   end
 
   def create
@@ -31,14 +31,12 @@ class My::ReservationsController < ApplicationController
     @reservation.confirm!
 
     redirect_back(fallback_location: request.referer)
-    # redirect_to rooms_path, notice: I18n.t('messages.success')
   end
 
   def destroy
     @reservation.cancel!
 
     redirect_back(fallback_location: request.referer)
-    # redirect_to rooms_path, notice: I18n.t('messages.success')
   end
 
   private

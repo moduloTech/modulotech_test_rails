@@ -31,10 +31,20 @@ RSpec.describe My::ReservationsController, type: :controller do
     end
   end
 
+  describe "PUT #confirmed" do
+    it "confirms the reservation and redirects back if not a turbo stream request" do
+      request.env["HTTP_REFERER"] = my_reservations_path
+      put :confirmed, params: { id: reservation.id }
+      expect(reservation.reload.status).to eq(Reservation::STATUS[:confirmed])
+      expect(response).to redirect_to(my_reservations_path)
+    end
+  end
+
   describe "DELETE #destroy" do
-    it "cancels the reservation" do
+    it "cancels the reservation and redirects back if not a turbo stream request" do
+      request.env["HTTP_REFERER"] = my_reservations_path
       expect {
-        delete :destroy, params: { id: reservation.id }
+        delete :destroy, params: { id: reservation.id }, format: :turbo_stream
       }.to change { reservation.reload.status }
       .from(Reservation::STATUS[:pending])
       .to(Reservation::STATUS[:canceled])

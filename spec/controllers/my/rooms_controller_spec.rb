@@ -52,19 +52,24 @@ RSpec.describe My::RoomsController, type: :controller do
           post :create, params: { room: attributes_for(:room, name: nil) }
         }.not_to change(Room, :count)
       end
+
+      it "renders the new template" do
+        post :create, params: { room: attributes_for(:room, name: nil) }
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
   end
 
 
   describe "GET #edit" do
+    let(:room) { create(:room, user: user) }
+
     it "returns http success" do
-      room = create(:room, user: user)
       get :edit, params: { id: room.id }
       expect(response).to have_http_status(:success)
     end
 
     it "assigns the requested room to @room" do
-      room = create(:room, user: user)
       get :edit, params: { id: room.id }
       expect(assigns(:room)).to eq(room)
     end
@@ -91,6 +96,11 @@ RSpec.describe My::RoomsController, type: :controller do
         patch :update, params: { id: room.id, room: { name: nil } }
         room.reload
         expect(room.name).not_to be_nil
+      end
+
+      it "renders the edit template" do
+        patch :update, params: { id: room.id, room: { name: nil } }
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
