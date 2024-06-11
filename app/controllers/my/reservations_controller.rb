@@ -1,7 +1,7 @@
 class My::ReservationsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_reservation, only: %i[destroy]
+  before_action :set_reservation, only: %i[confirmed destroy]
 
   def index
     @status = params[:status]
@@ -27,16 +27,24 @@ class My::ReservationsController < ApplicationController
     end
   end
 
+  def confirmed
+    @reservation.confirm!
+
+    redirect_back(fallback_location: request.referer)
+    # redirect_to rooms_path, notice: I18n.t('messages.success')
+  end
+
   def destroy
     @reservation.cancel!
 
-    redirect_to my_reservations_path, notice: I18n.t('messages.success')
+    redirect_back(fallback_location: request.referer)
+    # redirect_to rooms_path, notice: I18n.t('messages.success')
   end
 
   private
 
   def set_reservation
-    @reservation = current_user.reservations.find(params[:id])
+    @reservation = Reservation.find(params[:id])
   end
 
   def reservation_params

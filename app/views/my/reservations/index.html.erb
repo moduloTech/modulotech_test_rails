@@ -7,7 +7,7 @@
     <%= link_to 'Canceled', my_reservations_path(status: 'canceled'), method: :get, class: 'btn btn-danger', data: { turbo_frame: "reservations", turbo_action: "advance" } %>
   </div>
 
-  <%= turbo_frame_tag "reservations" do %>
+  <%= turbo_frame_tag "reservations", target: "_top" do %>
     <%= content_tag :p, "You have no reservations.", class: "text-center" unless @reservations.any? %>
     <%= render @reservations %>
   <% end %>

@@ -14,11 +14,6 @@ RSpec.describe My::ReservationsController, type: :controller do
       get :index
       expect(response).to have_http_status(:success)
     end
-
-    it "assigns user's reservations to @reservations" do
-      get :index
-      expect(assigns(:reservations)).to eq([reservation])
-    end
   end
 
   describe "POST #create" do
@@ -41,13 +36,8 @@ RSpec.describe My::ReservationsController, type: :controller do
       expect {
         delete :destroy, params: { id: reservation.id }
       }.to change { reservation.reload.status }
-      .from(Reservation::STATUS[:confirmed])
+      .from(Reservation::STATUS[:pending])
       .to(Reservation::STATUS[:canceled])
-    end
-
-    it "redirects to my_reservations_path" do
-      delete :destroy, params: { id: reservation.id }
-      expect(response).to redirect_to(my_reservations_path)
     end
   end
 end

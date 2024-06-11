@@ -16,6 +16,8 @@ class Reservation < ApplicationRecord
   validate :can_reserved, if: :dates_and_room_present?, on: :create
   before_validation :calculate_total_price, if: :dates_and_room_present?
 
+  default_scope { where.not(status: STATUS[:canceled]) }
+
   scope :reserved, lambda { |start_date, end_date|
                      where(start_date: ..end_date, end_date: start_date..)
                        .where.not(status: STATUS[:canceled])
@@ -25,6 +27,12 @@ class Reservation < ApplicationRecord
     where(room_id:).where.not(status: STATUS[:canceled]).order(start_date: :asc).pluck(:start_date, :end_date)
   }
 
+  scope :by_status, ->(status) { where(status:) }
+
+  def confirm!
+    update(status: STATUS[:confirmed])
+  end
+
   def cancel!
     update(status: STATUS[:canceled])
   end
@@ -33,12 +41,14 @@ class Reservation < ApplicationRecord
     status == STATUS[:confirmed]
   end
 
+  def pending?
+    status == STATUS[:pending]
+  end
+
   private
 
-  # Skip status, for the confirmation reservation
-  # Owner of the room should be able to confirm the reservation
   def set_default_status
-    self.status = STATUS[:confirmed]
+    self.status = STATUS[:pending]
   end
 
   def dates_and_room_present?
