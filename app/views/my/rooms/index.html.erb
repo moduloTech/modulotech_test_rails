@@ -1,0 +1,42 @@
+<div class="container">
+  <h1 class="display-4 text-center mb-5">My Rooms</h1>
+
+  <div class="text-center mb-3">
+    <%= link_to "Create Room", new_my_room_path, class: "btn btn-primary" %>
+  </div>
+
+  <div class="list-group">
+    <% @rooms.each do |room| %>
+      <div class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <% if room.image.attached? %>
+            <%= image_tag room.image.variant(resize: "100x100"), class: "img-thumbnail mr-3" %>
+          <% end %>
+          <% if room.gallery_images.attached? %>
+            <% room.gallery_images.each do |image| %>
+              <%= image_tag image.variant(resize: "100x100"), class: "img-thumbnail mr-3" %>
+            <% end %>
+          <% end %>
+          <div>
+            <h5 class="mb-1"><%= room.name %></h5>
+            <p class="mb-1">Location: <%= room.location %></p>
+            <p class="mb-1">Capacity: <%= room.capacity %></p>
+            <p class="mb-1">Price per Night: <%= humanized_money_with_symbol(room.price_per_night_cents) %></p>
+          </div>
+          <div class="text-right">
+            <%= link_to "Edit", edit_my_room_path(room), class: "btn btn-secondary mr-2" %>
+
+            <% unless room.reservations.empty? %>
+              <%= link_to "Show", my_room_path(room), data: { turbo_stream: false }, class: "btn btn-primary mr-2" %>
+            <% end %>
+
+            <%= button_to my_room_path(room), class: "btn btn-danger", method: :delete do %>
+              Delete
+            <% end %>
+          </div>
+        </div>
+        <%= turbo_frame_tag "room_reservations", target: "_top" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -49,11 +49,31 @@ gem "sassc-rails"
 gem "bootstrap"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'pry-rails'
+
+  # ENV 
+  gem "dotenv-rails"
+
+  # Code coverage
+  gem 'simplecov', require: false
+
+  # rubocop
+  gem "rubocop", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rspec", require: false
+
+  # Rspec as the testing framework [https://rspec.info]
+  gem 'rspec-rails'
+  gem 'rails-controller-testing'
+  gem 'factory_bot_rails'	
+  gem 'faker'
+  gem 'rails-controller-testing'
 end
 
 group :development do
@@ -76,3 +96,7 @@ end
 gem 'modulorails', '= 1.4.0.1'
 
 gem "devise"
+
+gem 'money-rails'
+
+gem 'pagy', '~> 6.2'

@@ -1,0 +1,49 @@
+<%= form_with(model: [:my, room], local: true) do |form| %>
+  <%= render partial: 'shared/error_messages', locals: { object: room } %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :location %>
+    <%= form.text_field :location, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :capacity %>
+    <%= form.number_field :capacity, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :price_per_night %>
+    <%= form.number_field :price_per_night_cents, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.rich_text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :image %>
+    <%= form.file_field :image, class: "form-control-file" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :gallery_images, multiple: true %>
+    <%= form.file_field :gallery_images, multiple: true, class: "form-control-file" %>
+    <% if room.gallery_images.attached? %>
+      <% room.gallery_images.each do |gallery_image| %>
+        <%= form.hidden_field :gallery_images, multiple: true, value: gallery_image.signed_id %>
+        <%= image_tag(gallery_image, height: '100') %>
+        <%= link_to "Remove", remove_image_my_room_path(gallery_image), data: { turbo_method: :delete } %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="text-center">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>

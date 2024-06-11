@@ -1,0 +1,14 @@
+<div class="container">
+  <h1 class="display-4 text-center mb-5">My Reservations</h1>
+
+  <div class="d-flex justify-content-center">
+    <%= link_to 'Confirmed', my_reservations_path(status: 'confirmed'), method: :get, class: 'btn btn-primary', data: { turbo_frame: "reservations", turbo_action: "advance" } %>
+    <%= link_to 'Pending', my_reservations_path(status: 'pending'), method: :get, class: 'btn btn-warning', data: { turbo_frame: "reservations", turbo_action: "advance" } %>
+    <%= link_to 'Canceled', my_reservations_path(status: 'canceled'), method: :get, class: 'btn btn-danger', data: { turbo_frame: "reservations", turbo_action: "advance" } %>
+  </div>
+
+  <%= turbo_frame_tag "reservations", target: "_top" do %>
+    <%= content_tag :p, "You have no reservations.", class: "text-center" unless @reservations.any? %>
+    <%= render @reservations %>
+  <% end %>
+</div>

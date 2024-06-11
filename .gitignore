@@ -32,3 +32,8 @@
 
 # Ignore Rubymine files
 .idea
+
+# Ignore .env
+.env
+
+coverage/**/*

@@ -1,0 +1,21 @@
+<div class="list-group-item list-group-item-action
+  <%= " bg-primary" if reservation.status == 'confirmed' %>
+  <%= " bg-warning" if reservation.status == 'pending' %>
+  <%= " bg-danger " if reservation.status == 'canceled' %>"
+  style="--bs-bg-opacity: .5;"
+>
+  <div class="d-flex w-100 justify-content-between align-items-center">
+    <div>
+      <h5 class="mb-1">Room: <%= reservation.room.name %></h5>
+      <p class="mb-1">Location: <%= reservation.room.location %></p>
+      <p class="mb-1">Start Date: <%= reservation.start_date %></p>
+      <p class="mb-1">End Date: <%= reservation.end_date %></p>
+      <p class="mb-1">Total Price: <%= humanized_money_with_symbol(reservation.price_cents) %></p>
+    </div>
+    <% if reservation.confirmed? %>
+      <%= button_to my_reservation_path(reservation), class: "btn btn-danger", method: :delete do %>
+        Delete
+      <% end %>
+    <% end %>
+  </div>
+</div>

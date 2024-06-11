@@ -1,3 +1,13 @@
-<h1>Rooms#index</h1>
-<p>Find me in app/views/rooms/index.html.erb</p>
-<!-- TODO: Display rooms available for booking -->
+<h1 class="text-center">ROOMS LIST</h1>
+
+<div class="container my-4">
+  <%= turbo_frame_tag "rooms", target: "_top" do %>
+    <div class="row">
+      <%= render @rooms %>
+    </div>
+
+    <div class="mt-4">
+      <%== pagy_bootstrap_nav(@pagy, link_extra: "data-turbo-frame='rooms'") %>
+    </div>
+  <% end %>
+</div>
